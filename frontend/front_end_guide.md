@@ -1,0 +1,1 @@
+This is a guide for newbies who want to make contributions in front end field of this project. 
