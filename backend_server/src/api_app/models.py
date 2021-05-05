@@ -78,7 +78,7 @@ class Novel(Literature):
                     chapter.save()
                     count = count+1
                     if count > 1:
-                        previous_chapter = self.chapter_set.all().order_by("-date")[1]
+                        previous_chapter = self.chapter_set.all().order_by("-id")[1]
 
                         chapter.previous_chapter = previous_chapter
                         chapter.save()
@@ -88,7 +88,8 @@ class Novel(Literature):
         except ValueError as e:
             raise e
         except Exception as e:
-            return "something went wrong"
+            raise e
+            # return "something went wrong"
             
         else:
             self.number_of_chapters = self.number_of_chapters + 1
@@ -115,13 +116,8 @@ class Chapter(Literature):
         # FIXME: the below code for setting `title` value is inefficient. Implement an efficient code instead
         if self.novel.chapter_set.count() > 1:
             chapters = list(self.novel.chapter_set.all())
-            print(chapters)
             for index,chapter in enumerate(chapters):
-                print('printed time')
-                print(chapter)
-                print(self)
                 if self.id == chapter.id:
-                    print('self is found')
                     part_no = index+1
                     self.title = self.novel.title + ' Part- ' + str(part_no)
         else:
