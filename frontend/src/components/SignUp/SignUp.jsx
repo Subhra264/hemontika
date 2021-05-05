@@ -1,7 +1,7 @@
 import Form from "../common/Form/Form";
 
 const formProps = {
-    userName: {
+    username: {
         type: 'text',
         required: true
     },
@@ -12,13 +12,23 @@ const formProps = {
     email: {
         type: 'email',
         required: true
+    }, 
+    firstName:{
+        type: 'text',
+        required: false,
+        placeholder: 'First Name'
+    },
+    lastName: {
+        type: 'text',
+        required: false,
+        placeholder: 'Last Name'
     }
 };
 
-export default function LogIn(props) {
+export default function SignUp(props) {
     return (
         <div>
-            Log In
+            Sign Up
             <Form {...formProps} />
         </div>
     );

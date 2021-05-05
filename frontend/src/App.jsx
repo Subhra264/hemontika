@@ -1,7 +1,7 @@
 import './App.scss';
 import { Switch, Route } from 'react-router-dom';
 import LogIn from './components/LogIn/LogIn';
-import SignUp from './components/SignIn/SignUp';
+import SignUp from './components/SignUp/SignUp';
 
 function App() {
   return (
