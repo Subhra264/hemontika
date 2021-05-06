@@ -27,8 +27,8 @@ const formProps = {
 
 export default function SignUp(props) {
     return (
-        <div>
-            Sign Up
+        <div className='form-container sign-up'>
+            <div className='form-title'>Sign Up</div>
             <Form {...formProps} />
         </div>
     );

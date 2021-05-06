@@ -1,4 +1,4 @@
-
+import './Form.scss';
 
 const Form = (props) => {
     const inputFields = [];
@@ -11,8 +11,11 @@ const Form = (props) => {
     }
 
     return (
-        <div>
-            {inputFields}
+        <div className='form'>
+            <form>
+                {inputFields}
+                <input type='submit' className='submit-button' value='Submit' />
+            </form>
         </div>
     );
 }

@@ -1,7 +1,7 @@
 import Form from "../common/Form/Form";
 
 const formProps = {
-    userName: {
+    username: {
         type: 'text',
         required: true
     },
@@ -17,8 +17,8 @@ const formProps = {
 
 export default function LogIn(props) {
     return (
-        <div>
-            Log In
+        <div className='form-container log-in'>
+            <div className='form-title'>Log In</div>
             <Form {...formProps} />
         </div>
     );
