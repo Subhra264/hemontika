@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
 from rest_framework.renderers import JSONRenderer
 from .models import *
 from .serializers import *
@@ -17,9 +17,51 @@ def index(request):
     novel_serializer = NovelSerializer(novels, many=True)
     chapter_serializer = ChapterSerializer(chapters,many=True)
     book_serializer = BookSerializer(book, many=True)
-    # print(poem_serializer.data)
-    # print(story_serializer.data)
-    # print(novel_serializer.data)
-    # print(chapter_serializer.data)
-    # print(book_serializer.data)
     return HttpResponse(JSONRenderer().render(book_serializer.data))
+
+def novels(requests):
+    
+    return JsonResponse({'message': 'hello'})
+
+
+def poems(requests):
+    return JsonResponse({'message': 'hello'})
+
+
+def stories(requests):
+    return JsonResponse({'message': 'hello'})
+
+
+def books(requests):
+    return JsonResponse({'message': 'hello'})
+
+def get_novel(requests):
+    return JsonResponse({'message': 'hello'})
+
+
+def get_poem(requests):
+    return JsonResponse({'message': 'hello'})
+
+def get_story(requests):
+    return JsonResponse({'message': 'hello'})
+
+def get_book(requests):
+    return JsonResponse({'message': 'hello'})
+
+def all_poems(requests):
+    return JsonResponse({'message': 'hello'})
+
+def all_stories(requests):
+    return JsonResponse({'message': 'hello'})
+
+def all_novels(requests):
+    return JsonResponse({'message': 'hello'})
+
+def all_books(requests):
+    return JsonResponse({'message': 'hello'})
+
+def tags(requests):
+    return JsonResponse({'message': 'hello'})
+
+def tag(requests,pk=None):
+    return JsonResponse({'message': 'hello'})

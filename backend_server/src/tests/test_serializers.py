@@ -18,7 +18,6 @@ class TestSerializers(TestCase):
         tag = Tag.objects.create(name='horror')
         tag2 = Tag.objects.create(name='bengali')
         tag3 = Tag.objects.create(name='short stories')
-        date = datetime.now()
 
         story = Story.objects.create(author=jack,title='a story about serializer',content='hello all')
         story2 = Story.objects.create(author=jack,title='title',content='sharlock homes')
@@ -76,7 +75,6 @@ class TestSerializers(TestCase):
     def test_novel_serializer(self):
         jack = HemontikaUser.objects.create(username= 'karli56',first_name = 'jack', last_name= 'ma',email = 'jackma12@gmail.com', password = "kaka@134")
         john = HemontikaUser.objects.create(username= 'johni56',first_name = 'john', last_name= 'doe',email = 'johndoe12@gmail.com', password = "kaka@134")
-        date = datetime.now()
         tag = Tag.objects.create(name='novel')
         novel = Novel.objects.create(author= jack, title = 'A novel NOT about testing')
         tag.novel_set.add(novel)
@@ -109,7 +107,6 @@ class TestSerializers(TestCase):
         chapter1 = novel.create_chapter(content='hello chapter')
         chapter2 = novel.create_chapter(content='chapter 2')
 
-        date = datetime.now()
         serializer1 = ChapterSerializer(chapter1)
         json_data = JSONRenderer().render(serializer1.data)
         data = json.dumps({"id":1,"title":"A novel about testing Part- 1","front_img":None,"date":self.DATE,"content":"hello chapter","author":1,"previous_chapter":None,"novel":1,"tags":[]})
