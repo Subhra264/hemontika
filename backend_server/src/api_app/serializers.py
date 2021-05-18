@@ -1,13 +1,23 @@
 from rest_framework import serializers
 from .models import *
 
+class NotAllowedModelSerializer(serializers.ModelSerializer):
+    def __init__(self,*args, **kwargs):
+        fields = kwargs.pop('exclude_fields', None)
+        super().__init__(*args,**kwargs)
+        if fields:
+            not_allowed = set(fields)
+            existing = set(self.fields)
+            for field in not_allowed:
+                if field in existing:
+                    self.fields.pop(field)
 
-class StorySerializer(serializers.ModelSerializer):
+class StorySerializer(NotAllowedModelSerializer):
     class Meta:
         model = Story
         fields = '__all__'
 
-class PoemSerializer(serializers.ModelSerializer):
+class PoemSerializer(NotAllowedModelSerializer):
     class Meta:
         model = Poem
         fields = '__all__'
@@ -23,7 +33,12 @@ class ChapterSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class BookSerializer(serializers.ModelSerializer):
+class BookSerializer(NotAllowedModelSerializer):
     class Meta:
         model = Book
+        fields = '__all__'
+
+class TagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tag
         fields = '__all__'

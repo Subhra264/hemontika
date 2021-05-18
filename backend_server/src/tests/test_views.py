@@ -1,9 +1,9 @@
 from api_app.views import *
 from api_app.models import *
 from api_app.serializers import *
-from django.test import TestCase
+from django.test import TestCase,Client
 import pytest
-import requests,json
+import json
 from freezegun import freeze_time
 
 @freeze_time("2021-01-01 11:12:13.000000")
@@ -14,7 +14,7 @@ class TestViews(TestCase):
 
     @pytest.mark.django_db
     def test_novels_view(self):
-        Url = 'http://127.0.0.1:8000/api/novels/'
+        client = Client()
 
         jack = HemontikaUser.objects.create(username= 'karli56',first_name = 'jack', last_name= 'ma',email = 'jackma12@gmail.com', password = "kaka@134")
         john = HemontikaUser.objects.create(username= 'johni56',first_name = 'john', last_name= 'doe',email = 'johndoe12@gmail.com', password = "kaka@134")
@@ -32,34 +32,33 @@ class TestViews(TestCase):
         expected_data = [{
                 "id":1,
                 "title":"A novel NOT about testing",
-                "author": "http://127.0.0.1:8000/api/user/karli56/",
-                "front_img": "http://127.0.0.1:8000/front_img.png",
+                "author": 1,
+                # "front_img": "http://127.0.0.1:8000/front_img.png",
+                "front_img": None,
                 "date": self.DATE,
                 "tags":[
-                    "http://127.0.0.1:8000/api/tags/novel",
+                    1,
                 ],
-                "no_of_chapters":2,
-                "chapters":[1,2],
+                "number_of_chapters":2,
             },
             {
                 "id":2,
                 "title":"Another novel",
-                "author":"http://127.0.0.1:8000/api/user/johni56/",
-                "front_img": "http://127.0.0.1:8000/front_img2.png",
+                "author":2,
+                "front_img": None,
                 "date":self.DATE,
                 "tags":[],
-                "no_of_chapters":3,
-                "chapters":[3,4,5]
+                "number_of_chapters":3,
             }
         ]
         expected_data = json.dumps(expected_data)
-        response = requests.get(url=Url)
+        response = client.get('/api/novels/', HTTP_ACCEPT='application/json')
         self.assertJSONEqual(response.content, expected_data)
 
 
     @pytest.mark.django_db
     def test_poems_view(self):
-        Url = 'http://127.0.0.1:8000/api/poems/'
+        client = Client()
 
         jack = HemontikaUser.objects.create(username= 'karli56',first_name = 'jack', last_name= 'ma',email = 'jackma12@gmail.com', password = "kaka@134")
         john = HemontikaUser.objects.create(username= 'johni56',first_name = 'john', last_name= 'doe',email = 'johndoe12@gmail.com', password = "kaka@134")
@@ -72,36 +71,33 @@ class TestViews(TestCase):
         expected_data = [{
                 "id":1,
                 "title":"blossoms",
-                "author_url": "http://127.0.0.1:8000/api/user/karli56/",
-                "content_url":"http://127.0.0.1:8000/api/poems/1/",
-                "front_img": "http://127.0.0.1:8000/front_img.png",
+                "author": 1,
+                "front_img": None,
                 "date": self.DATE,
                 "tags":[
-                    "http://127.0.0.1:8000/api/tags/poem",
+                    1,
                 ],
 
             },
             {
                 "id":2,
                 "title":"two blossoms",
-                "author":"http://127.0.0.1:8000/api/user/johni56/",
-                "content_url": "http:// 127.0.0.1:8000/api/poems/2/",
-                "front_img": "http://127.0.0.1:8000/front_img.png",
+                "author":2,
+                "front_img": None,
                 "date": self.DATE,
                 "tags":[],
             },
             {
                 "id":3,
                 "title":"three blossoms",
-                "author":"http://127.0.0.1:8000/api/user/johni56/",
-                "content_url": "http:// 127.0.0.1:8000/api/poems/3/",
-                "front_img": "http://127.0.0.1:8000/front_img.png",
+                "author":2,
+                "front_img": None,
                 "date": self.DATE,
                 "tags":[],
             }
         ]
         expected_data = json.dumps(expected_data)
-        response = requests.get(url=Url)
+        response = client.get('/api/poems/')
         self.assertJSONEqual(response.content, expected_data)
 
 
@@ -109,6 +105,7 @@ class TestViews(TestCase):
     @pytest.mark.django_db
     def test_stories_view(self):
         Url = 'http://127.0.0.1:8000/api/stories/'
+        client = Client()
 
         jack = HemontikaUser.objects.create(username= 'karli56',first_name = 'jack', last_name= 'ma',email = 'jackma12@gmail.com', password = "kaka@134")
         john = HemontikaUser.objects.create(username= 'johni56',first_name = 'john', last_name= 'doe',email = 'johndoe12@gmail.com', password = "kaka@134")
@@ -126,32 +123,25 @@ class TestViews(TestCase):
         expected_data = [{
                 "id":1,
                 "title":"a story about serializer",
-                "author_url": "http://127.0.0.1:8000/api/user/karli56/",
-                "content_url":"http://127.0.0.1:8000/api/stories/1/",
-                "front_img": "http://127.0.0.1:8000/front_img.png",
+                "author": 1,
+                "front_img": None,
                 "date": self.DATE,
-                "tags":[
-                    "http://127.0.0.1:8000/api/tags/horror/",
-                    "http://127.0.0.1:8000/api/tags/bengali/",
-                    "http://127.0.0.1:8000/api/tags/short-stories"
-                ],
+                "tags":[1,2,3,],
 
             },
             {
                 "id":2,
                 "title":"title",
-                "author":"http://127.0.0.1:8000/api/user/karli56/",
-                "content_url": "http:// 127.0.0.1:8000/api/stories/2/",
-                "front_img": "http://127.0.0.1:8000/front_img.png",
+                "author":1,
+                "front_img": None,
                 "date": self.DATE,
-                "tags":["http://127.0.0.1:8000/api/tags/horror/"],
+                "tags":[1,],
             },
             {
                 "id":3,
                 "title":"A man with a twisted lip",
-                "author":"http://127.0.0.1:8000/api/user/johni56/",
-                "content_url": "http:// 127.0.0.1:8000/api/stories/2/",
-                "front_img": "http://127.0.0.1:8000/front_img.png",
+                "author":2,
+                "front_img": None,
                 "date": self.DATE,
                 "tags":[],
             }
@@ -159,15 +149,14 @@ class TestViews(TestCase):
         ]
 
         expected_data = json.dumps(expected_data)
-        response = requests.get(url=Url)
+        response = client.get('/api/stories/')
         self.assertJSONEqual(response.content, expected_data)
 
 
 
     @pytest.mark.django_db
     def test_books_view(self):
-        Url = 'http://127.0.0.1:8000/api/books/'
-
+        client = Client()
         jack = HemontikaUser.objects.create(username= 'karli56',first_name = 'jack', last_name= 'ma',email = 'jackma12@gmail.com', password = "kaka@134")
         
         novel = Novel.objects.create(author= jack, title = 'A novel about testing')
@@ -184,24 +173,22 @@ class TestViews(TestCase):
         expected_data = [{
                 "id":1,
                 "title":" a book about testing",
-                "author":"http://127.0.0.1:8000/api/user/karli56/",
-                "front_img": "http://127.0.0.1:8000/front_img.png",
+                "author":1,
+                "front_img": None,
+                'number_of_contents':4,
                 "date": self.DATE,
-                "novels":[1,],
-                "stories":[1,],
-                "poems":[1,2],
                 "tags":[],
 
             }
         ]
 
         expected_data = json.dumps(expected_data)
-        response = requests.get(url=Url)
+        response = client.get('/api/books/')
         self.assertJSONEqual(response.content, expected_data)
 
 
     def test_tags_view(self):
-        Url = "http://127.0.0.1:8000/api/tags/"
+        client = Client()
 
         Tag.objects.create(name="horror")
         Tag.objects.create(name='mystry')
@@ -227,13 +214,13 @@ class TestViews(TestCase):
         ]
 
         expected_data = json.dumps(expected_data)
-        response = requests.get(url=Url)
-        self.assertJSONEqual(response.content, expected_data)
+        response = client.get('/api/tags/')
         assert response.status_code == 200
+        self.assertJSONEqual(response.content, expected_data)
 
 
     def test_tag_view(self):
-        Url = "http://127.0.0.1:8000/api/tags/1/"
+        client = Client()
 
         Tag.objects.create(name="horror")
         Tag.objects.create(name='mystry')
@@ -249,5 +236,5 @@ class TestViews(TestCase):
             "books":[]
         }
         expected_data = json.dumps(expected_data)
-        response = requests.get(url=Url)
+        response = client.get('/api/tags/1/')
         self.assertJSONEqual(response.content, expected_data)
