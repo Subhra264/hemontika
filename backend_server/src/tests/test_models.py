@@ -1,23 +1,18 @@
-from .models import *
+from api_app.models import *
 from django.test import TestCase
 from django.db import transaction
 import pytest
-from unittest.mock import Mock,patch
 
 # Create your tests here.
 # we prefer test driven development. So please write tests first before fixing any bug or adding any feature
 
 class TestModels(TestCase):
 
-    @pytest.mark.django_db
-    def setup(self):
-        jack = HemontikaUser(username= 'karli56',first_name = 'jack', last_name= 'ma',email = 'jackma12@gmail.com', password = "kaka@134")
-        jack.save()
+    # @pytest.mark.django_db
+    # def setUp(self):
+    #     jack = HemontikaUser(username= 'karli56',first_name = 'jack', last_name= 'ma',email = 'jackma12@gmail.com', password = "kaka@134")
+    #     jack.save()
 
-    # def test_user(self):
-        
-    #     pass
-    
     @pytest.mark.django_db
     def test_stories(self):
         jack = HemontikaUser(username= 'karli56',first_name = 'jack', last_name= 'ma',email = 'jackma12@gmail.com', password = "kaka@134")
@@ -108,4 +103,3 @@ class TestModels(TestCase):
     
     # @pytest.mark.django_db
     # def test_libraries(self):
-        
