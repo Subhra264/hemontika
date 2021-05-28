@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import HemontikaUser,Story,Poem,Novel,Book,Chapter,Tag
+from .models import HemontikaUser, Story, Poem, Novel, Book, Chapter, Tag
 
 # Register your models here.
 
