@@ -12,6 +12,7 @@ class HemontikaUser(User):
     pass
 
 
+# have to move the tag class to the Tag_api app
 class Tag(models.Model):
     name = models.CharField(max_length=60)
 
@@ -23,6 +24,15 @@ class Literature(models.Model):
     front_img = models.ImageField(blank=True, null=True)
     date = models.DateTimeField(auto_now_add=True)
     tags = models.ManyToManyField(Tag, blank=True)
+
+    def delete(self, *args, **kwargs):
+        all_related_books = self.book_set.all() if hasattr(self, 'book_set') else None
+        if all_related_books:
+            super().delete(*args, **kwargs)
+            for book in list(all_related_books):
+                book.set_number_of_contents()
+        else:
+            return super().delete(*args, **kwargs)
 
     class Meta:
         abstract = True
@@ -94,9 +104,14 @@ class Novel(Literature):
             # return "something went wrong"
 
         else:
-            self.number_of_chapters = self.number_of_chapters + 1
             super().save()
+            self.set_number_of_chapters()
             return chapter
+
+    def set_number_of_chapters(self):
+        chapters_count = self.chapter_set.count()
+        self.number_of_chapters = chapters_count
+        self.save()
 
 
 class Chapter(Literature):
@@ -107,11 +122,14 @@ class Chapter(Literature):
     )
     novel = models.ForeignKey(Novel, on_delete=models.CASCADE, blank=True)
 
-    def pre_delete(self, *args, **kwargs):
+    def delete(self, *args, **kwargs):
+        novel = self.novel
         previous_chapter = self.previous_chapter
         next_chapter = self.next_chapter
+        super().delete(*args, **kwargs)
         next_chapter.previous_chapter = previous_chapter
         next_chapter.save()
+        novel.set_number_of_chapters()
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -131,7 +149,6 @@ class Chapter(Literature):
         if self.tags is None and self.novel.tags.count() > 0:
             self.tags.set(self.novel.tags)
         super().save(*args, **kwargs)
-        # print(self.title)
 
     def __str__(self):
         return self.title
@@ -152,18 +169,28 @@ class Book(Literature):
                 for content in content_list:
                     if isinstance(content, Story):
                         self.stories.add(content)
-                        self.number_of_contents = self.number_of_contents + 1
                     elif isinstance(content, Poem):
                         self.poems.add(content)
-                        self.number_of_contents = self.number_of_contents + 1
                     elif isinstance(content, Novel):
                         self.novels.add(content)
-                        self.number_of_contents = self.number_of_contents + 1
 
                 super().save()
+                self.set_number_of_contents()
 
         except:
             raise Exception("Something went wrong")
+
+    def set_number_of_contents(self):
+        number_of_contents = 0
+        stories_count, poems_count, novels_count = self.stories.count(), self.poems.count(), self.novels.count()
+        if stories_count and stories_count > 0:
+            number_of_contents += stories_count
+        if poems_count and poems_count > 0:
+            number_of_contents += poems_count
+        if novels_count and novels_count > 0:
+            number_of_contents += novels_count
+        self.number_of_contents = number_of_contents
+        self.save()
 
     # def save(self,*args,**kwargs):
     #     if self.number_of_contents > 0:
