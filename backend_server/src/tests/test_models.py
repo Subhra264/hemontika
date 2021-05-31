@@ -84,6 +84,10 @@ class TestModels(TestCase):
             chapter_not_exist = True
         self.assertEqual(chapter_not_exist, True)
         assert novel.chapter_set.get(id=3).previous_chapter == novel.chapter_set.get(id=2)
+        chapter = novel.chapter_set.get(id=2)
+        chapter.delete()
+        assert novel.number_of_chapters == 2
+        assert novel.chapter_set.get(id=1).next_chapter == novel.chapter_set.get(id=3)
 
     @pytest.mark.django_db
     def test_books(self):
@@ -108,6 +112,15 @@ class TestModels(TestCase):
         assert book.stories.count() == 3
         assert book.poems.get(id=1) == poem
         assert novel == book.novels.get(id=1)
+        story3.delete()
+        book = Book.objects.get(id=1)
+        assert book.number_of_contents == 4
+        novel.delete()
+        book = Book.objects.get(id=1)
+        assert book.number_of_contents == 3
+        poem.delete()
+        book = Book.objects.get(id=1)
+        assert book.number_of_contents == 2
         # book2 = Book(author=jack,title='another book')
         # self.assertRaises(Exception,book.save)
 
