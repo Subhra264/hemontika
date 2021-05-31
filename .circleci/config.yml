@@ -1,0 +1,39 @@
+version: 2.1
+
+jobs:
+  test_py:
+
+    docker:
+      - image: cimg/python:3.9.5
+
+    steps:
+      - checkout
+      - run:
+          name: Run python tests
+          command: |
+            cd backend_server/
+            pip install -r requirements.txt
+            python -m flake8 .
+            cd src/
+            pytest .
+  
+  test_js:
+
+    docker:
+      - image: cimg/node:15.1
+    
+    steps:
+      - checkout
+      - run:
+          name: Run Js tests
+          command: |
+            cd frontend_server/
+            yarn
+            yarn test
+
+
+workflows:
+  test:
+    jobs:
+      - test_py
+      - test_js
