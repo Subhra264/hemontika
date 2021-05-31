@@ -15,6 +15,8 @@ jobs:
             pip install -r requirements.txt
             python -m flake8 .
             cd src/
+            python manage.py makemigrations
+            python manage.py migrate
             pytest .
   
   test_js:
