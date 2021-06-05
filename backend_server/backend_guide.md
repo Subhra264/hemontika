@@ -10,7 +10,7 @@ It gives all the novel model objects.The outcome is given below -
         "title": "A novel NOT about testing",
         "author": 1,
         "front_img": "http://127.0.0.1:8000/front_img.png",
-        "date": self.DATE,
+        "date": "2021-01-01T11:12:13Z",
         "tags": [
             1,
         ],
@@ -21,7 +21,7 @@ It gives all the novel model objects.The outcome is given below -
         "title": "Another novel",
         "author": 2,
         "front_img": null,
-        "date": self.DATE,
+        "date": "2021-01-01T11:12:13Z",
         "tags": [],
         "number_of_chapters": 3
     }
@@ -36,7 +36,7 @@ same as above. Gives the list of poem model objects. Example -
         "title": "blossoms",
         "author": 1,
         "front_img": null,
-        "date": self.DATE,
+        "date": "2021-01-01T11:12:13Z",
         "tags": [
             1,
         ]
@@ -46,7 +46,7 @@ same as above. Gives the list of poem model objects. Example -
         "title": "two blossoms",
         "author": 2,
         "front_img": null,
-        "date": self.DATE,
+        "date": "2021-01-01T11:12:13Z",
         "tags": []
     },
     {
@@ -54,7 +54,7 @@ same as above. Gives the list of poem model objects. Example -
         "title": "three blossoms",
         "author": 2,
         "front_img": null,
-        "date": self.DATE,
+        "date": "2021-01-01T11:12:13Z",
         "tags": []
     }
 ]
@@ -68,7 +68,7 @@ Gives a list of existing Stories. Example -
         "title": "a story about serializer",
         "author": 1,
         "front_img": null,
-        "date": self.DATE,
+        "date": "2021-01-01T11:12:13Z",
         "tags": [
             1,
             2,
@@ -80,7 +80,7 @@ Gives a list of existing Stories. Example -
         "title": "title",
         "author": 1,
         "front_img": null,
-        "date": self.DATE,
+        "date": "2021-01-01T11:12:13Z",
         "tags": [
             1
         ]
@@ -98,7 +98,7 @@ Gives a list of all books. Format -
         "author": 1,
         "front_img": null,
         "number_of_contents": 4,
-        "date": self.DATE,
+        "date": "2021-01-01T11:12:13Z",
         "tags": []
     }
 ]
