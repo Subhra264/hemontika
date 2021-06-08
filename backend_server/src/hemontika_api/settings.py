@@ -41,6 +41,11 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "api_app.apps.ApiAppConfig",
+    "art.apps.ArtConfig",
+    "music.apps.MusicConfig",
+    "recitation.apps.RecitationConfig",
+    "tag.apps.TagConfig",
+    "user.apps.UserConfig",
 ]
 
 MIDDLEWARE = [
