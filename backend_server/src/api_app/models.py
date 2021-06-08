@@ -26,7 +26,7 @@ class Literature(models.Model):
     tags = models.ManyToManyField(Tag, blank=True)
 
     def delete(self, *args, **kwargs):
-        all_related_books = self.book_set.all() if hasattr(self, 'book_set') else None
+        all_related_books = self.book_set.all() if hasattr(self, "book_set") else None
         if all_related_books:
             super().delete(*args, **kwargs)
             for book in list(all_related_books):
