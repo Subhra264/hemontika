@@ -25,9 +25,7 @@ class TestSerializers(TestCase):
 
         story = Story.objects.create(author=jack, title="a story about serializer", content="hello all")
         story2 = Story.objects.create(author=jack, title="title", content="sharlock homes")
-        Story.objects.create(
-            author=john, title="A man with a twisted lip", content="bla bla bla"
-        )
+        Story.objects.create(author=john, title="A man with a twisted lip", content="bla bla bla")
         tag.story_set.set([story, story2])
         tag2.story_set.add(story)
         tag3.story_set.add(story)
