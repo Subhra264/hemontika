@@ -28,7 +28,7 @@ As this is a django + React app, you have to install python dependencies as well
 You have to create a virtual enviornment for your project so that the python dependencies do not create conflicts due to different versions of same package. To create a virtual enviornment run the following commands - 
 ```bash
 cd backend_server/
-python -c venv venv
+python -m venv venv
 ```
 This will create a virtual enviornment named `venv`. While creating virtual enviornment, make sure you named it as `venv`. It will automatically be added to `.gitignore` file.
 ### activate the virtual environment
@@ -36,7 +36,7 @@ Before running any other command, first activate the virtual environment. The co
 ### install python dependencies 
 Run the following command to install all python package requirements - 
 ```bash
-python install -r requirements.txt
+pip install -r requirements.txt
 ```
 ### install npm dependencies 
 Now if everything is fine, change your current directory from `backend_server` to `frontend` - `cd ../frontend`. Now run `npm install`. It will install all the npm dependencies for the application. 
