@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Form from "../common/Form/Form";
-import authenticate from '../utils/authenticate';
+import authenticate from '../../utils/authenticate';
 
 export default function LogIn(props) {
     const [username, setUsername] = useState('');
