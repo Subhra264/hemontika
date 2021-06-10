@@ -1,4 +1,5 @@
-from api_app.models import HemontikaUser, Story, Poem, Book, Novel, Chapter, Tag
+from api_app.models import HemontikaUser, Story, Poem, Book, Novel, Chapter
+from tag.models import Tag
 from api_app.serializers import BookSerializer, NovelSerializer, PoemSerializer, StorySerializer, ChapterSerializer
 from django.test import TestCase
 import pytest, json

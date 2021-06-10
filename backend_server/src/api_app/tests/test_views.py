@@ -1,4 +1,5 @@
-from api_app.models import HemontikaUser, Story, Poem, Book, Novel, Tag
+from api_app.models import HemontikaUser, Story, Poem, Book, Novel
+from tag.models import Tag
 from django.test import TestCase, Client
 import pytest
 import json
@@ -56,7 +57,7 @@ class TestViews(TestCase):
             },
         ]
         expected_data = json.dumps(expected_data)
-        response = client.get("/api/novels/", HTTP_ACCEPT="application/json")
+        response = client.get("/api/literature/novels/", HTTP_ACCEPT="application/json")
         self.assertJSONEqual(response.content, expected_data)
 
     @pytest.mark.django_db
@@ -104,7 +105,7 @@ class TestViews(TestCase):
             },
         ]
         expected_data = json.dumps(expected_data)
-        response = client.get("/api/poems/")
+        response = client.get("/api/literature/poems/")
         self.assertJSONEqual(response.content, expected_data)
 
     @pytest.mark.django_db
@@ -162,7 +163,7 @@ class TestViews(TestCase):
         ]
 
         expected_data = json.dumps(expected_data)
-        response = client.get("/api/stories/")
+        response = client.get("/api/literature/stories/")
         self.assertJSONEqual(response.content, expected_data)
 
     @pytest.mark.django_db
@@ -194,41 +195,5 @@ class TestViews(TestCase):
         ]
 
         expected_data = json.dumps(expected_data)
-        response = client.get("/api/books/")
-        self.assertJSONEqual(response.content, expected_data)
-
-    def test_tags_view(self):
-        client = Client()
-
-        Tag.objects.create(name="horror")
-        Tag.objects.create(name="mystry")
-        Tag.objects.create(name="fiction")
-        Tag.objects.create(name="crime")
-
-        expected_data = [
-            {
-                "id": 1,
-                "name": "horror",
-            },
-            {"id": 2, "name": "mystry"},
-            {"id": 3, "name": "fiction"},
-            {"id": 4, "name": "crime"},
-        ]
-
-        expected_data = json.dumps(expected_data)
-        response = client.get("/api/tags/")
-        assert response.status_code == 200
-        self.assertJSONEqual(response.content, expected_data)
-
-    def test_tag_view(self):
-        client = Client()
-
-        Tag.objects.create(name="horror")
-        Tag.objects.create(name="mystry")
-        Tag.objects.create(name="fiction")
-        Tag.objects.create(name="crime")
-
-        expected_data = {"id": 1, "name": "horror", "poems": [], "novels": [], "stories": [], "books": []}
-        expected_data = json.dumps(expected_data)
-        response = client.get("/api/tags/1/")
+        response = client.get("/api/literature/books/")
         self.assertJSONEqual(response.content, expected_data)

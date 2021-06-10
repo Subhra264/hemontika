@@ -1,9 +1,8 @@
 from django.contrib import admin
-from .models import HemontikaUser, Story, Poem, Novel, Book, Chapter, Tag
+from .models import HemontikaUser, Story, Poem, Novel, Book, Chapter
 
 # Register your models here.
 
-admin.site.register(Tag)
 admin.site.register(HemontikaUser)
 admin.site.register(Story)
 admin.site.register(Poem)
