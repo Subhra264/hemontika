@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from tag.models import Tag
 
 # Create your models here.
 
@@ -10,11 +11,6 @@ class HemontikaUser(User):
     """
 
     pass
-
-
-# have to move the tag class to the Tag_api app
-class Tag(models.Model):
-    name = models.CharField(max_length=60)
 
 
 class Literature(models.Model):
@@ -146,8 +142,9 @@ class Chapter(Literature):
 
         if not self.author:
             self.author = self.novel.author
-        if self.tags is None and self.novel.tags.count() > 0:
-            self.tags.set(self.novel.tags)
+        if self.tags.count() == 0 and self.novel.tags.count() > 0:
+            for tag in self.novel.tags.all():
+                tag.chapter_set.add(self)
         super().save(*args, **kwargs)
 
     def __str__(self):

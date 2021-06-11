@@ -16,6 +16,4 @@ urlpatterns = [
     path("user/<int:pk>/stories/", views.all_stories, name="api_app.user.all_stories"),
     path("user/<int:pk>/novels/", views.all_novels, name="api_app.user.all_novels"),
     path("user/<int:pk>/book/", views.all_books, name="api_app.user.all_books"),
-    path("tags/<int:pk>/", views.TagApiView.as_view(), name="api_app.tag"),
-    path("tags/", views.TagsApiView.as_view(), name="api_app.tags"),
 ]

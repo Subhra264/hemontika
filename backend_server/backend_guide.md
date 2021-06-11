@@ -1,7 +1,7 @@
 This is for newbies who want to contribute in the back end of this project.
 ## APIs for hemontika
 Here are the APIs for connecting the backend with front end -
-### `api/novels/`
+### `api/literature/novels/`
 It gives all the novel model objects.The outcome is given below -
 ```json
 [
@@ -27,7 +27,7 @@ It gives all the novel model objects.The outcome is given below -
     }
 ]
 ```
-### `api/poems/`
+### `api/literature/poems/`
 same as above. Gives the list of poem model objects. Example -
 ```json
 [
@@ -59,7 +59,7 @@ same as above. Gives the list of poem model objects. Example -
     }
 ]
 ```
-### `api/stories/`
+### `api/literature/stories/`
 Gives a list of existing Stories. Example -
 ```json
 [
@@ -88,7 +88,7 @@ Gives a list of existing Stories. Example -
 ]
 ```
 
-### `api/books/`
+### `api/literature/books/`
 Gives a list of all books. Format -
 ```json
 [
@@ -116,14 +116,14 @@ It gives all the tags that currently exist in the database.Output format -
     {"id": 4, "name": "crime"}
 ]
 ```
-### `api/novels/<int:pk>/`  (under development)
+### `api/literature/novels/<int:pk>/`  (under development)
 Gives a specific novel matching the queried id. Example output will be shared soon.
 
-### `api/stories/<int:pk>/` (under development)
+### `api/literature/stories/<int:pk>/` (under development)
 Gives a specific story with the matching id defined on the url.
-### `api/poems/<int:pk>/` (under development)
+### `api/literature/poems/<int:pk>/` (under development)
 Gives a specific poem that matches with the id specified in the url.
-### `api/books/<int:pk>/` (under development)
+### `api/literature/books/<int:pk>/` (under development)
 Gives a specific book with the specified id.
 ### `api/tags/<int:pk>/`
 Gives a specific tag based on the id specified on the url. Example -

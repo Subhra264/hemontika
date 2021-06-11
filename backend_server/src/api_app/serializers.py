@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Story, Poem, Book, Novel, Chapter, Tag
+from .models import Story, Poem, Book, Novel, Chapter
 
 
 class NotAllowedModelSerializer(serializers.ModelSerializer):
@@ -41,10 +41,4 @@ class ChapterSerializer(serializers.ModelSerializer):
 class BookSerializer(NotAllowedModelSerializer):
     class Meta:
         model = Book
-        fields = "__all__"
-
-
-class TagSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Tag
         fields = "__all__"

@@ -1,4 +1,5 @@
 from api_app.models import HemontikaUser, Story, Poem, Book, Novel, Chapter
+from tag.models import Tag
 from django.test import TestCase
 from django.db import transaction
 import pytest
@@ -8,11 +9,13 @@ import pytest
 
 
 class TestModels(TestCase):
-
-    # @pytest.mark.django_db
-    # def setUp(self):
-    #     jack = HemontikaUser(username= 'karli56',first_name = 'jack', last_name= 'ma',email = 'jackma12@gmail.com', password = "kaka@134")
-    #     jack.save()
+    @classmethod
+    def setUpTestData(cls):
+        Tag.objects.create(name="horror")
+        Tag.objects.create(name="adventure")
+        Tag.objects.create(name="mystry")
+        Tag.objects.create(name="comedy")
+        Tag.objects.create(name="sci-fi")
 
     @pytest.mark.django_db
     def test_stories(self):
@@ -23,9 +26,15 @@ class TestModels(TestCase):
         content = "Is anything special needed for our project? may be."
         story = Story(author=jack, title="Anything special ..", content=content)
         story.save()
+        tag = Tag.objects.get(id=1)
+        tag.story_set.add(story)
+        Tag.objects.get(id=3).story_set.add(story)
         assert story.author is not None
         assert story.title != ""
         assert story.content != ""
+        self.assertEqual(story.tags.count(), 2)
+        self.assertEqual(story.tags.get(id=1), tag)
+        self.assertEqual(story.tags.get(id=3), Tag.objects.get(id=3))
 
         with transaction.atomic():
             story2 = Story(title="Anthing special for me..", content=content)
@@ -45,6 +54,10 @@ class TestModels(TestCase):
         content = "Is anything special needed for our project? may be."
         poem = Poem(author=jack, title="Anything special ..", content=content)
         poem.save()
+        tag = Tag.objects.get(id=1)
+        tag.poem_set.add(poem)
+        self.assertEqual(poem.tags.count(), 1)
+        self.assertEqual(poem.tags.get(id=1), tag)
         assert poem.author is not None
         assert poem.title != ""
         assert poem.content != ""
@@ -65,18 +78,25 @@ class TestModels(TestCase):
         jack.save()
         novel = Novel(author=jack, title="A novel about testing")
         novel.save()
-        novel.create_chapter(content="somthing here...")
+        Tag.objects.get(id=4).novel_set.add(novel)
+        Tag.objects.get(id=5).novel_set.add(novel)
+        Tag.objects.get(id=2).novel_set.add(novel)
+        chapter1 = novel.create_chapter(content="somthing here...")
         novel.create_chapter(content="somthing here too ...")
         novel.create_chapter(content="somthing here also ...")
-        # print(chapter)
+        self.assertEqual(novel.tags.count(), 3)
+        self.assertEqual(novel.tags.get(id=4), Tag.objects.get(id=4))
+        self.assertEqual(chapter1.tags.count(), 3)
+        self.assertEqual(chapter1.tags.get(id=4), Tag.objects.get(id=4))
+        self.assertEqual(novel.chapter_set.get(id=3).tags.count(), 3)
         assert Novel.objects.count() == 1
         assert novel.chapter_set.count() == 3
         assert Chapter.objects.count() == 3
         assert novel.number_of_chapters == 3
         assert novel.chapter_set.filter(content="").count() == 0
-        assert novel.chapter_set.get(id=1).previous_chapter is None
-        assert novel.chapter_set.get(id=1).title == "A novel about testing Part- 1"
-        assert novel.chapter_set.get(id=1).next_chapter == novel.chapter_set.get(id=2)
+        assert chapter1.previous_chapter is None
+        assert chapter1.title == "A novel about testing Part- 1"
+        assert chapter1.next_chapter == novel.chapter_set.get(id=2)
         chapter_not_exist = False
         try:
             non_existing_chapter = novel.chapter_set.get(id=3).next_chapter  # noqa: F841

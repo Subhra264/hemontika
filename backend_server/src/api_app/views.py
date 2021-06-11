@@ -2,8 +2,8 @@ from django.http import HttpResponse, JsonResponse
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .models import Story, Poem, Book, Novel, Tag
-from .serializers import BookSerializer, NovelSerializer, PoemSerializer, StorySerializer, TagSerializer
+from .models import Story, Poem, Book, Novel
+from .serializers import BookSerializer, NovelSerializer, PoemSerializer, StorySerializer
 
 # Create your views here.
 
@@ -76,31 +76,3 @@ def all_novels(requests):
 
 def all_books(requests):
     return JsonResponse({"message": "hello"})
-
-
-class TagsApiView(APIView):
-    def get(self, request, format=None):
-        tags = Tag.objects.all()
-        serialized_tags = TagSerializer(tags, many=True).data
-        return Response(serialized_tags)
-
-
-class TagApiView(APIView):
-    def get(self, request, pk=None, format=None):
-        if pk:
-            try:
-                tag = Tag.objects.get(id=pk)
-            except Exception as e:
-                raise e
-            else:
-                serialized_tag = TagSerializer(tag).data
-                print(serialized_tag)
-                novels = Novel.objects.filter(tags=tag).values_list("id", flat=True)
-                poems = Poem.objects.filter(tags=tag).values_list("id", flat=True)
-                stories = Story.objects.filter(tags=tag).values_list("id", flat=True)
-                books = Book.objects.filter(tags=tag).values_list("id", flat=True)
-                serialized_tag["novels"] = novels
-                serialized_tag["poems"] = poems
-                serialized_tag["stories"] = stories
-                serialized_tag["books"] = books
-                return Response(serialized_tag)
