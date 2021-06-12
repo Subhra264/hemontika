@@ -1,4 +1,3 @@
-from django.forms.fields import JSONString
 from django.test import TestCase
 from recitation.models import Recitation
 from tag.models import Tag

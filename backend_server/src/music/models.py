@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models.base import Model
 from tag.models import Tag
 from api_app.models import HemontikaUser
 
