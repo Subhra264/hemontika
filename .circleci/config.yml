@@ -14,6 +14,7 @@ jobs:
             cd backend_server/
             pip install -r requirements.txt
             python -m flake8 .
+            black --check .
             cd src/
             python manage.py makemigrations
             python manage.py migrate
