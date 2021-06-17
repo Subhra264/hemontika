@@ -1,7 +1,7 @@
 from django.test import TestCase
 from recitation.models import Recitation
 from tag.models import Tag
-from api_app.models import HemontikaUser
+from literature.models import HemontikaUser
 
 # create model related tests here
 

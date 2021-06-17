@@ -48,7 +48,10 @@ class Migration(migrations.Migration):
                 ("front_img", models.ImageField(blank=True, null=True, upload_to="")),
                 ("date", models.DateTimeField(auto_now_add=True)),
                 ("content", models.TextField()),
-                ("author", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="api_app.hemontikauser")),
+                (
+                    "author",
+                    models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="literature.hemontikauser"),
+                ),
                 ("tags", models.ManyToManyField(blank=True, to="tag.Tag")),
             ],
             options={
@@ -63,7 +66,10 @@ class Migration(migrations.Migration):
                 ("front_img", models.ImageField(blank=True, null=True, upload_to="")),
                 ("date", models.DateTimeField(auto_now_add=True)),
                 ("content", models.TextField()),
-                ("author", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="api_app.hemontikauser")),
+                (
+                    "author",
+                    models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="literature.hemontikauser"),
+                ),
                 ("tags", models.ManyToManyField(blank=True, to="tag.Tag")),
             ],
             options={
@@ -78,7 +84,10 @@ class Migration(migrations.Migration):
                 ("front_img", models.ImageField(blank=True, null=True, upload_to="")),
                 ("date", models.DateTimeField(auto_now_add=True)),
                 ("number_of_chapters", models.PositiveIntegerField(default=0)),
-                ("author", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="api_app.hemontikauser")),
+                (
+                    "author",
+                    models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="literature.hemontikauser"),
+                ),
                 ("tags", models.ManyToManyField(blank=True, to="tag.Tag")),
             ],
             options={
@@ -96,12 +105,15 @@ class Migration(migrations.Migration):
                 (
                     "author",
                     models.ForeignKey(
-                        blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to="api_app.hemontikauser"
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="literature.hemontikauser",
                     ),
                 ),
                 (
                     "novel",
-                    models.ForeignKey(blank=True, on_delete=django.db.models.deletion.CASCADE, to="api_app.novel"),
+                    models.ForeignKey(blank=True, on_delete=django.db.models.deletion.CASCADE, to="literature.novel"),
                 ),
                 (
                     "previous_chapter",
@@ -111,7 +123,7 @@ class Migration(migrations.Migration):
                         null=True,
                         on_delete=django.db.models.deletion.SET_NULL,
                         related_name="next_chapter",
-                        to="api_app.chapter",
+                        to="literature.chapter",
                     ),
                 ),
                 ("tags", models.ManyToManyField(blank=True, to="tag.Tag")),
@@ -128,10 +140,13 @@ class Migration(migrations.Migration):
                 ("front_img", models.ImageField(blank=True, null=True, upload_to="")),
                 ("date", models.DateTimeField(auto_now_add=True)),
                 ("number_of_contents", models.PositiveIntegerField(default=0)),
-                ("author", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="api_app.hemontikauser")),
-                ("novels", models.ManyToManyField(blank=True, to="api_app.Novel")),
-                ("poems", models.ManyToManyField(blank=True, to="api_app.Poem")),
-                ("stories", models.ManyToManyField(blank=True, to="api_app.Story")),
+                (
+                    "author",
+                    models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="literature.hemontikauser"),
+                ),
+                ("novels", models.ManyToManyField(blank=True, to="literature.Novel")),
+                ("poems", models.ManyToManyField(blank=True, to="literature.Poem")),
+                ("stories", models.ManyToManyField(blank=True, to="literature.Story")),
                 ("tags", models.ManyToManyField(blank=True, to="tag.Tag")),
             ],
             options={

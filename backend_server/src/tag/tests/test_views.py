@@ -1,5 +1,5 @@
 from tag.models import Tag
-from api_app.models import Story, HemontikaUser
+from literature.models import Story, HemontikaUser
 from django.test import TestCase, Client
 import json
 from freezegun import freeze_time
