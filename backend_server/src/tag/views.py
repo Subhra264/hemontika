@@ -2,7 +2,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import Tag
 from .serializers import TagSerializer
-from api_app.models import Novel, Poem, Story, Book
+from literature.models import Novel, Poem, Story, Book
 
 
 # Create your views here.

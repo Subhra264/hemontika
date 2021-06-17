@@ -10,7 +10,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ("tag", "0001_initial"),
-        ("api_app", "0001_initial"),
+        ("literature", "0001_initial"),
     ]
 
     operations = [
@@ -21,7 +21,10 @@ class Migration(migrations.Migration):
                 ("title", models.CharField(max_length=50)),
                 ("image", models.ImageField(blank=True, upload_to="")),
                 ("date", models.DateTimeField(auto_now_add=True)),
-                ("artist", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="api_app.hemontikauser")),
+                (
+                    "artist",
+                    models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="literature.hemontikauser"),
+                ),
                 ("tags", models.ManyToManyField(blank=True, to="tag.Tag")),
             ],
         ),

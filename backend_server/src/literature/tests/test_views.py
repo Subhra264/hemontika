@@ -1,4 +1,4 @@
-from api_app.models import HemontikaUser, Story, Poem, Book, Novel
+from literature.models import HemontikaUser, Story, Poem, Book, Novel
 from tag.models import Tag
 from django.test import TestCase, Client
 import pytest

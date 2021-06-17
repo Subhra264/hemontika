@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ("api_app", "0001_initial"),
+        ("literature", "0001_initial"),
         ("tag", "0001_initial"),
     ]
 
@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
                 ("date", models.DateTimeField(auto_now_add=True)),
                 (
                     "musician",
-                    models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="api_app.hemontikauser"),
+                    models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="literature.hemontikauser"),
                 ),
                 ("tags", models.ManyToManyField(blank=True, null=True, to="tag.Tag")),
             ],

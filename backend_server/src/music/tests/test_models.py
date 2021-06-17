@@ -1,6 +1,6 @@
 from django.test import TestCase
 from music.models import Music
-from api_app.models import HemontikaUser
+from literature.models import HemontikaUser
 from tag.models import Tag
 
 

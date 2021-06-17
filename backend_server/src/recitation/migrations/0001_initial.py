@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ("api_app", "0001_initial"),
+        ("literature", "0001_initial"),
         ("tag", "0001_initial"),
     ]
 
@@ -22,7 +22,10 @@ class Migration(migrations.Migration):
                 ("front_img", models.ImageField(blank=True, upload_to="")),
                 ("recitation_audio", models.FileField(blank=True, upload_to="")),
                 ("date", models.DateTimeField(auto_now_add=True)),
-                ("reciter", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="api_app.hemontikauser")),
+                (
+                    "reciter",
+                    models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="literature.hemontikauser"),
+                ),
                 ("tags", models.ManyToManyField(blank=True, null=True, to="tag.Tag")),
             ],
         ),

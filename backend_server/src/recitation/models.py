@@ -1,5 +1,5 @@
 from django.db import models
-from api_app.models import HemontikaUser
+from literature.models import HemontikaUser
 from tag.models import Tag
 
 # Create your models here.
