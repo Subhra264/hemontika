@@ -1,5 +1,7 @@
 from literature.models import HemontikaUser, Story, Poem, Book, Novel, Chapter
 from tag.models import Tag
+from tempfile import NamedTemporaryFile
+from django.core.files import File
 from django.test import TestCase
 from django.db import transaction
 import pytest
@@ -77,16 +79,22 @@ class TestModels(TestCase):
         )
         jack.save()
         novel = Novel(author=jack, title="A novel about testing")
+        temp_img = File(NamedTemporaryFile(suffix="jpg"))
+        temp_img.name = "test_image.jpg"
+        novel.front_img = temp_img
         novel.save()
         Tag.objects.get(id=4).novel_set.add(novel)
         Tag.objects.get(id=5).novel_set.add(novel)
         Tag.objects.get(id=2).novel_set.add(novel)
         chapter1 = novel.create_chapter(content="somthing here...")
-        novel.create_chapter(content="somthing here too ...")
+        chapter2 = novel.create_chapter(content="somthing here too ...")
         novel.create_chapter(content="somthing here also ...")
+        self.assertRegex(novel.front_img.name, r"literature/Novel/_1_test_image()|(_([0-9a-zA-Z]){7}).jpg")
         self.assertEqual(novel.tags.count(), 3)
         self.assertEqual(novel.tags.get(id=4), Tag.objects.get(id=4))
         self.assertEqual(chapter1.tags.count(), 3)
+        self.assertRegex(chapter1.front_img.name, r"literature/Novel/_1_test_image()|(_([0-9a-zA-Z]){7}).jpg")
+        self.assertRegex(chapter2.front_img.name, r"literature/Novel/_1_test_image()|(_([0-9a-zA-Z]){7}).jpg")
         self.assertEqual(chapter1.tags.get(id=4), Tag.objects.get(id=4))
         self.assertEqual(novel.chapter_set.get(id=3).tags.count(), 3)
         assert Novel.objects.count() == 1

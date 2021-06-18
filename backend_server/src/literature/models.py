@@ -13,11 +13,15 @@ class HemontikaUser(User):
     pass
 
 
+def unique_file_path(instance, filename):
+    return "literature/{}/_{}_{}".format(type(instance).__name__, instance.author.id, filename)
+
+
 class Literature(models.Model):
     # basic fields for every literature
     author = models.ForeignKey(HemontikaUser, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
-    front_img = models.ImageField(blank=True, null=True)
+    front_img = models.ImageField(upload_to=unique_file_path, blank=True, null=True)
     date = models.DateTimeField(auto_now_add=True)
     tags = models.ManyToManyField(Tag, blank=True)
 
@@ -129,7 +133,7 @@ class Chapter(Literature):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        self.front_img = self.novel.front_img if self.front_img is None else self.front_img
+        self.front_img = self.novel.front_img if self.front_img is not None else self.front_img
         # FIXME: the below code for setting `title` value is inefficient. Implement an efficient code instead
         if self.novel.chapter_set.count() > 1:
             chapters = list(self.novel.chapter_set.all())
