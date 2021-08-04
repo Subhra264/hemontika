@@ -6,7 +6,7 @@ This is the Web Application for hemontika. Hemontika is a website where author c
 # Run in a local machine
 To install in a local machine, you have to first fork it. After that, clone it to your local machine using git.
 ```bash
-git clone https://github.com/<your-username>/hemontika-web.git
+git clone https://github.com/<your-username>/hemontika.git
 ```
 
 Now there are two options to run the application on your local machine - with docker and without docker
@@ -19,7 +19,7 @@ It is the easiest and the recommended method to run the application.
 2. For windows, you need to have `wsl`(`WSL2` recommended) enabled.
 
 ### Procedure - 
-Open your terminal and type `sudo docker-compose up`. That's it! You will see that the server has started running after some time. Now open your browser and go to `127.0.0.1:8000/` . You will see the backend server is running. The front end part will be seen at `127.0.0.1:3000`.
+Open your terminal and type `sudo docker-compose up`. That's it! You will see that the server has started running after some time. Now open your browser and go to `127.0.0.1:8000/` . You will see the backend server is running. The front end part can be seen at `127.0.0.1:3000`.
 
 ## Without docker - 
 This procedure is little bit complex compared to the previous one and can produce `Works on my computer` type errors. So be ready to solve those.
