@@ -58,10 +58,6 @@ class Poem(Literature):
 class Novel(Literature):
     number_of_chapters = models.PositiveIntegerField(default=0)
 
-    # def save(self,*args, **kwargs):
-    #     if self.chapter_set.count() == 0:
-    #         return
-
     def __str__(self):
         return self.title
 
@@ -71,7 +67,6 @@ class Novel(Literature):
         try:
             chapter = None
             if content:
-                # count = Chapter.objects.filter(novel=self).count()
                 count = self.chapter_set.count()
                 if part is not None and count >= part - 1:
                     previous_chapter = self.chapter_set.all()[part - 1]

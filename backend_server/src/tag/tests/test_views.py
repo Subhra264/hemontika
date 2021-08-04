@@ -1,5 +1,4 @@
 from tag.models import Tag
-from literature.models import Story, HemontikaUser
 from django.test import TestCase, Client
 import json
 from freezegun import freeze_time
@@ -30,20 +29,6 @@ class TestViews(TestCase):
         ]
 
         expected_data = json.dumps(expected_data)
-        response = client.get("/api/tags/")
+        response = client.get("/tags/")
         assert response.status_code == 200
-        self.assertJSONEqual(response.content, expected_data)
-
-    def test_tag_view(self):
-        client = Client()
-        jack = HemontikaUser.objects.create(
-            username="karli56", first_name="jack", last_name="ma", email="jackma12@gmail.com", password="kaka@134"
-        )
-        story = Story.objects.create(author=jack, title="a story about serializer", content="hello all")
-
-        tag = Tag.objects.get(id=1)
-        tag.story_set.add(story)
-        expected_data = {"id": 1, "name": "horror", "poems": [], "novels": [], "stories": [1], "books": []}
-        expected_data = json.dumps(expected_data)
-        response = client.get("/api/tags/1/")
         self.assertJSONEqual(response.content, expected_data)

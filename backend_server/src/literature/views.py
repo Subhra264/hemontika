@@ -1,7 +1,4 @@
-from django.http import HttpResponse, JsonResponse
-from rest_framework.renderers import JSONRenderer
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework.viewsets import ModelViewSet
 from .models import Story, Poem, Book, Novel
 from .serializers import BookSerializer, NovelSerializer, PoemSerializer, StorySerializer
 
@@ -9,70 +6,43 @@ from .serializers import BookSerializer, NovelSerializer, PoemSerializer, StoryS
 
 
 def index(request):
-    book = Book.objects.all()
-    book_serializer = BookSerializer(book, many=True)
-    return HttpResponse(JSONRenderer().render(book_serializer.data))
-
-
-# def novels(requests):
-
-#     return JsonResponse({'message': 'hello'})
-class NovelsApiView(APIView):
-    def get(self, request, format=None):
-        novels = Novel.objects.all()
-        serialized_novels = NovelSerializer(novels, many=True)
-        response = serialized_novels.data
-        return Response(response)
-
-
-class PoemsApiView(APIView):
-    def get(self, request, format=None):
-        poems = Poem.objects.all()
-        serialized_poems = PoemSerializer(poems, many=True, exclude_fields=["content"]).data
-        return Response(serialized_poems)
-
-
-class StoriesApiView(APIView):
-    def get(self, request, format=None):
-        stories = Story.objects.all()
-        serialized_stories = StorySerializer(stories, many=True, exclude_fields=["content"]).data
-        return Response(serialized_stories)
-
-
-class BooksApiView(APIView):
-    def get(self, request, format=None):
-        books = Book.objects.all()
-        serialized_books = BookSerializer(books, many=True, exclude_fields=["novels", "stories", "poems"]).data
-        return Response(serialized_books)
-
-
-class GetNovelApiView(APIView):
     pass
 
 
-class GetPoemApiView(APIView):
-    pass
+class NovelViewSet(ModelViewSet):
+    queryset = Novel.objects.all()
+    serializer_class = NovelSerializer
+    http_method_names = ["get", "post", "patch", "delete", "head"]
 
 
-class GetStoryApiView(APIView):
-    pass
+class PoemViewSet(ModelViewSet):
+    queryset = Poem.objects.all()
+    serializer_class = PoemSerializer
+    http_method_names = ["get", "post", "patch", "delete", "head"]
+
+    def get_serializer(self, *args, **kwargs):
+        if self.action == "list":
+            kwargs["exclude_fields"] = ["content"]
+        return super().get_serializer(*args, **kwargs)
 
 
-class GetBookApiView(APIView):
-    pass
+class StoryViewSet(ModelViewSet):
+    queryset = Story.objects.all()
+    serializer_class = StorySerializer
+    http_method_names = ["get", "post", "patch", "delete", "head"]
+
+    def get_serializer(self, *args, **kwargs):
+        if self.action == "list":
+            kwargs["exclude_fields"] = ["content"]
+        return super().get_serializer(*args, **kwargs)
 
 
-def all_poems(requests):
-    return JsonResponse({"message": "hello"})
+class BookViewSet(ModelViewSet):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+    http_method_names = ["get", "post", "patch", "delete", "head"]
 
-
-def all_stories(requests):
-    return JsonResponse({"message": "hello"})
-
-
-def all_novels(requests):
-    return JsonResponse({"message": "hello"})
-
-
-def all_books(requests):
-    return JsonResponse({"message": "hello"})
+    def get_serializer(self, *args, **kwargs):
+        if self.action == "list":
+            kwargs["exclude_fields"] = ["novels", "poems", "stories"]
+        return super().get_serializer(*args, **kwargs)

@@ -1,1 +1,9 @@
-# Create your views here.
+from rest_framework.viewsets import ModelViewSet
+from .models import Music
+from .serializers import MusicSerializer
+
+
+class MusicViewSet(ModelViewSet):
+    queryset = Music.objects.all()
+    serializer_class = MusicSerializer
+    http_method_names = ["get", "post", "patch", "delete", "head"]

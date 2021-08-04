@@ -57,7 +57,7 @@ class TestViews(TestCase):
             },
         ]
         expected_data = json.dumps(expected_data)
-        response = client.get("/api/literature/novels/", HTTP_ACCEPT="application/json")
+        response = client.get("/literature/novels/", HTTP_ACCEPT="application/json")
         self.assertJSONEqual(response.content, expected_data)
 
     @pytest.mark.django_db
@@ -105,7 +105,7 @@ class TestViews(TestCase):
             },
         ]
         expected_data = json.dumps(expected_data)
-        response = client.get("/api/literature/poems/")
+        response = client.get("/literature/poems/")
         self.assertJSONEqual(response.content, expected_data)
 
     @pytest.mark.django_db
@@ -163,7 +163,7 @@ class TestViews(TestCase):
         ]
 
         expected_data = json.dumps(expected_data)
-        response = client.get("/api/literature/stories/")
+        response = client.get("/literature/stories/")
         self.assertJSONEqual(response.content, expected_data)
 
     @pytest.mark.django_db
@@ -195,5 +195,5 @@ class TestViews(TestCase):
         ]
 
         expected_data = json.dumps(expected_data)
-        response = client.get("/api/literature/books/")
+        response = client.get("/literature/books/")
         self.assertJSONEqual(response.content, expected_data)
