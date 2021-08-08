@@ -2,8 +2,10 @@ from tempfile import NamedTemporaryFile
 from django.test import TestCase
 from django.core.files import File
 from music.models import Music
-from literature.models import HemontikaUser
 from tag.models import Tag
+from django.contrib.auth import get_user_model
+
+HemontikaUser = get_user_model()
 
 
 class TestModels(TestCase):

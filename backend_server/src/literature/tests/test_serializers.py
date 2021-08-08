@@ -1,4 +1,4 @@
-from literature.models import HemontikaUser, Story, Poem, Book, Novel, Chapter
+from literature.models import Story, Poem, Book, Novel, Chapter
 from tag.models import Tag
 from literature.serializers import BookSerializer, NovelSerializer, PoemSerializer, StorySerializer, ChapterSerializer
 from django.test import TestCase
@@ -6,7 +6,10 @@ import pytest, json
 from tempfile import NamedTemporaryFile
 from rest_framework.renderers import JSONRenderer
 from django.core.files import File
+from django.contrib.auth import get_user_model
 from freezegun import freeze_time
+
+HemontikaUser = get_user_model()
 
 
 def return_image_path(instance):

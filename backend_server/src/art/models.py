@@ -1,6 +1,6 @@
 from django.db import models
-from literature.models import HemontikaUser
 from tag.models import Tag
+from django.conf import settings
 
 # Create your models here.
 
@@ -10,7 +10,7 @@ def unique_art_image(instance, filename):
 
 
 class Art(models.Model):
-    artist = models.ForeignKey(HemontikaUser, on_delete=models.CASCADE)
+    artist = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     image = models.ImageField(upload_to=unique_art_image)
     date = models.DateTimeField(auto_now_add=True)

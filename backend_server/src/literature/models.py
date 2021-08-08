@@ -1,16 +1,8 @@
 from django.db import models
-from django.contrib.auth.models import User
 from tag.models import Tag
+from django.conf import settings
 
 # Create your models here.
-
-
-class HemontikaUser(User):
-    """This class extends the User model. It have various foreign key to other models so that user can
-    access the full feature of those models.
-    """
-
-    pass
 
 
 def unique_file_path(instance, filename):
@@ -19,7 +11,7 @@ def unique_file_path(instance, filename):
 
 class Literature(models.Model):
     # basic fields for every literature
-    author = models.ForeignKey(HemontikaUser, on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     front_img = models.ImageField(upload_to=unique_file_path, blank=True, null=True)
     date = models.DateTimeField(auto_now_add=True)
@@ -110,7 +102,7 @@ class Novel(Literature):
 
 
 class Chapter(Literature):
-    author = models.ForeignKey(HemontikaUser, on_delete=models.CASCADE, blank=True, null=True)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
     content = models.TextField()
     previous_chapter = models.OneToOneField(
         "self", models.SET_NULL, default=None, null=True, blank=True, related_name="next_chapter"

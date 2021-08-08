@@ -4,9 +4,11 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.db import transaction
 from recitation.models import Recitation
 from tag.models import Tag
-from literature.models import HemontikaUser
+from django.contrib.auth import get_user_model
 
 # create model related tests here
+
+HemontikaUser = get_user_model()
 
 
 class TestModels(TestCase):

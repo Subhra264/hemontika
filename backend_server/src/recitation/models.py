@@ -1,6 +1,6 @@
 from django.db import models
-from literature.models import HemontikaUser
 from tag.models import Tag
+from django.conf import settings
 
 # Create your models here.
 
@@ -14,7 +14,7 @@ def unique_recitation_audio(instance, filename):
 
 
 class Recitation(models.Model):
-    reciter = models.ForeignKey(HemontikaUser, on_delete=models.CASCADE)
+    reciter = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     front_img = models.ImageField(upload_to=unique_front_img, null=True, blank=True)
     recitation_audio = models.FileField(upload_to=unique_recitation_audio)

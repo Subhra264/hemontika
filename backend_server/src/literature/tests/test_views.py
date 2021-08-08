@@ -1,9 +1,12 @@
-from literature.models import HemontikaUser, Story, Poem, Book, Novel
+from django.contrib.auth import get_user_model
+from literature.models import Story, Poem, Book, Novel
 from tag.models import Tag
 from django.test import TestCase, Client
 import pytest
 import json
 from freezegun import freeze_time
+
+HemontikaUser = get_user_model()
 
 
 @freeze_time("2021-01-01 11:12:13.000000")

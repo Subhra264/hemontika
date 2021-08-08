@@ -1,11 +1,13 @@
 from art.models import Art
-from literature.models import HemontikaUser
 from tag.models import Tag
+from django.contrib.auth import get_user_model
 from django.test import TestCase, Client
 from django.core.files import File
 from freezegun import freeze_time
 from tempfile import NamedTemporaryFile
 import json
+
+HemontikaUser = get_user_model()
 
 
 @freeze_time("2021-01-01 11:12:13.000000")

@@ -1,5 +1,6 @@
-from literature.models import HemontikaUser, Story, Poem, Book, Novel, Chapter
+from literature.models import Story, Poem, Book, Novel, Chapter
 from tag.models import Tag
+from django.contrib.auth import get_user_model
 from tempfile import NamedTemporaryFile
 from django.core.files import File
 from django.test import TestCase
@@ -8,6 +9,7 @@ import pytest
 
 # Create your tests here.
 # we prefer test driven development. So please write tests first before fixing any bug or adding any feature
+HemontikaUser = get_user_model()
 
 
 class TestModels(TestCase):

@@ -3,8 +3,10 @@ from django.db import transaction
 from django.test import TestCase
 from django.core.files.uploadedfile import SimpleUploadedFile
 from art.models import Art
-from literature.models import HemontikaUser
 from tag.models import Tag
+from django.contrib.auth import get_user_model
+
+HemontikaUser = get_user_model()
 
 
 class TestModels(TestCase):

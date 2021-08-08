@@ -2,12 +2,14 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.utils import json
 from art.serializers import ArtSerializer
 from tag.models import Tag
-from literature.models import HemontikaUser
 from art.models import Art
 from django.test import TestCase
+from django.contrib.auth import get_user_model
 from django.core.files import File
 from freezegun import freeze_time
 from tempfile import NamedTemporaryFile
+
+HemontikaUser = get_user_model()
 
 
 @freeze_time("2021-01-01 11:12:13.000000")

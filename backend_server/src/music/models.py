@@ -1,6 +1,6 @@
 from django.db import models
 from tag.models import Tag
-from literature.models import HemontikaUser
+from django.conf import settings
 
 # create your models here
 
@@ -10,7 +10,7 @@ def unique_user_path(instance, filename):
 
 
 class Music(models.Model):
-    musician = models.ForeignKey(HemontikaUser, on_delete=models.CASCADE)
+    musician = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     video = models.FileField(upload_to=unique_user_path)
     date = models.DateTimeField(auto_now_add=True)

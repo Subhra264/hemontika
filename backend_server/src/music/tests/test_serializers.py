@@ -3,11 +3,13 @@ from music.serializers import MusicSerializer
 from rest_framework.renderers import JSONRenderer
 from music.models import Music
 from django.test import TestCase
-from literature.models import HemontikaUser
 from django.core.files import File
+from django.contrib.auth import get_user_model
 from tempfile import NamedTemporaryFile
 from tag.models import Tag
 from freezegun import freeze_time
+
+HemontikaUser = get_user_model()
 
 
 @freeze_time("2021-01-01 11:12:13.000000")
