@@ -16,7 +16,6 @@ It is the easiest and the recommended method to run the application.
 
 ### Pre-Requistics - 
 1. you need to have docker and docker-compose installed(installing docker desktop will install both tools)
-2. For windows, you need to have `wsl`(`WSL2` recommended) enabled.
 
 ### Procedure - 
 Open your terminal and type `sudo docker-compose up`. That's it! You will see that the server has started running after some time. Now open your browser and go to `127.0.0.1:8000/` . You will see the backend server is running. The front end part can be seen at `127.0.0.1:3000`.
