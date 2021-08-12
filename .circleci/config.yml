@@ -1,6 +1,17 @@
 version: 2.1
 
 jobs:
+  test_build:
+
+    docker:
+      - image: cimg/base:2021.04
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Build code
+          command: docker-compose build
+  
   test_py:
 
     docker:
@@ -23,7 +34,7 @@ jobs:
   test_js:
 
     docker:
-      - image: cimg/node:15.1
+      - image: cimg/node:14.17.0
     
     steps:
       - checkout
@@ -39,5 +50,10 @@ workflows:
   version: 2.1
   test:
     jobs:
-      - test_py
-      - test_js
+      - test_build
+      - test_py:
+            requires:
+              - test_build
+      - test_js:
+            requires:
+              - test_build

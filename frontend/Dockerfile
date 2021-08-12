@@ -1,4 +1,4 @@
-FROM node
+FROM node:14.17
 LABEL org.opencontainers.image.vendor="Abhra303"
 LABEL org.opencontainers.image.authors="Abhra303, Subhra264"
 LABEL org.opencontainers.image.source ="https://github.com/Abhra303/hemontika.git"
