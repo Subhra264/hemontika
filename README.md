@@ -39,9 +39,9 @@ Run the following command to install all python package requirements -
 pip install -r requirements.txt
 ```
 ### install npm dependencies 
-Now if everything is fine, change your current directory from `backend_server` to `frontend` - `cd ../frontend`. Now run `yarn` if you have yarn else run `npm install`. It will install all the npm dependencies for the application. 
+Now if everything is fine, change your current directory from `backend_server` to `frontend` - `cd ../frontend`. Now run `yarn`. It will install all the npm dependencies for the application. 
 ### Run the front end
-Run the `npm start` command on the terminal and you will be able to see the front end part at `127.0.0.1:3000`.
+Run the `yarn start` command on the terminal and you will be able to see the front end part at `127.0.0.1:3000`.
 ### Run the server
 Now if all are great, change your current working directory to `backend_server/src`. Run `python manage.py runserver` and wait till the server starts. Now go to `127.0.0.1:8000/`. You will see the application running locally!
 

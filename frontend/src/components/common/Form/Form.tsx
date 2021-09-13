@@ -1,6 +1,6 @@
 import './Form.scss';
 
-const Form = (props) => {
+const Form = (props: any) => {
     const inputFields = [];
 
     for (const field in props.fields) {

@@ -1,5 +1,5 @@
 
-export default async function authenticate(fetchUri, reqBody) {
+export default async function authenticate(fetchUri: string, reqBody: any) {
     try {
         let response = await fetch(fetchUri, {
             method: 'POST',

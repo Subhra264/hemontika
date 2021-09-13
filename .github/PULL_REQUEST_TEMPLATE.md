@@ -2,6 +2,7 @@
 
 - [ ] Bug fix
 - [ ] New feature
+- [ ] Docs change
 
 Fixes: <!-- #issue, e.g. Fixes: #4653 -->
 
@@ -19,7 +20,7 @@ Fixes: <!-- #issue, e.g. Fixes: #4653 -->
 
 ## Additional Context : 
 
-## CheckList: 
+## CheckList ( For Code Contributions ): 
 - [ ] You have read the Contributing.Md
 - [ ] Your code needs a docs update
 - [ ] You have updated the document( If appropriate)
