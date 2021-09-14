@@ -1,11 +1,34 @@
+import React from 'react';
 import './Form.scss';
 
-const Form = (props: any) => {
-    const inputFields = [];
+interface InputField {
+    type: string;
+    required?: boolean;
+    placeholder?: string;
+    value?: string;
+    readonly?: boolean;
+    className?: string;
+    onChange?: React.ChangeEventHandler
+}
 
-    for (const field in props.fields) {
-        const inputField = props.fields[field];
-        inputFields.push(
+interface FormInputProps {
+    [field: string]: InputField;
+}
+
+export interface FormProps {
+    fields: FormInputProps;
+    onSubmit: React.MouseEventHandler<HTMLInputElement>;
+    error: string;
+    children?: JSX.Element;
+}
+
+const Form: React.FC<FormProps> = (props): JSX.Element => {
+    const inputElems: JSX.Element[] = [];
+
+    for(const field in props.fields) {
+        const inputField: InputField = props.fields[field];
+
+        inputElems.push(
             <input placeholder={field} {...inputField} key={field} />
         );
     }
@@ -13,11 +36,15 @@ const Form = (props: any) => {
     return (
         <div className='form'>
             <form>
-                {inputFields}
-                <input type='submit' className='submit-button' value='Submit' onClick={props.onSubmit} />
+                {inputElems}
+                <div className={`form-error ${props.error? '' : 'display-none'}`}>
+                    {props.error}
+                </div>
+                <input type='submit' value='Submit' id='submit-button' onClick={props.onSubmit}/>
             </form>
+            { props.children }
         </div>
     );
-}
+};
 
 export default Form;
