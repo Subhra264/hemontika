@@ -1,8 +1,10 @@
-import { render, screen } from '@testing-library/react';
-import SignUp from '../../../components/SignUp/SignUp';
+import { screen } from '@testing-library/react';
+import App from '../../../App';
+import { renderWrappedWithRouter } from '../../../utils/test-utils';
 
 test('renders the Login component correctly', () => {
-    render(<SignUp />);
+    renderWrappedWithRouter(<App />, { initialEntries: ['/sign-up'] });
+    
     const usernameInputElem = screen.getByPlaceholderText('username');
     const emailInputElem = screen.getByPlaceholderText('email');
     const passwordInputElem = screen.getByPlaceholderText('password');
