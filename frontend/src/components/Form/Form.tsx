@@ -40,7 +40,7 @@ const Form: React.FC<FormProps> = (props): JSX.Element => {
                 <div className={`form-error ${props.error? '' : 'display-none'}`}>
                     {props.error}
                 </div>
-                <input type='submit' value='Submit' id='submit-button' onClick={props.onSubmit}/>
+                <input type='submit' value='Submit' className='submit-button' onClick={props.onSubmit}/>
             </form>
             { props.children }
         </div>

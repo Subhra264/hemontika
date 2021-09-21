@@ -1,0 +1,13 @@
+@mixin centreIt($flexDirection: row) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: $flexDirection;
+}
+
+// COLOR NAMING FORMAT: 1. ((primary|secondary)?_)(colorName)_(dark|light)
+//                      2. colorName not needed for main primary or secondary colors
+// e.g. 
+
+/* Main primary and secondary Colors */
+$primary_dark: #3D3E61;
