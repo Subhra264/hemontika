@@ -1,26 +1,33 @@
 from rest_framework import serializers
-from .models import Story, Poem, Book, Novel, Chapter
+from .models import Story, Poem, DragDropSelectBook, Novel, Chapter
 
 
-class NotAllowedModelSerializer(serializers.ModelSerializer):
+class LimitFieldModelSerializer(serializers.ModelSerializer):
     def __init__(self, *args, **kwargs):
-        fields = kwargs.pop("exclude_fields", None)
+        exclude_fields = kwargs.pop("exclude_fields", None)
+        include_fields = kwargs.pop("include_fields", None)
+        existing = set(self.fields)
         super().__init__(*args, **kwargs)
-        if fields:
-            not_allowed = set(fields)
-            existing = set(self.fields)
+        if exclude_fields:
+            not_allowed = set(exclude_fields)
             for field in not_allowed:
                 if field in existing:
                     self.fields.pop(field)
+        elif include_fields:
+            allowed = set(include_fields)
+            for field in self.fields:
+                if field not in allowed:
+                    self.fields.pop(field)
 
 
-class StorySerializer(NotAllowedModelSerializer):
+
+class StorySerializer(LimitFieldModelSerializer):
     class Meta:
         model = Story
         fields = "__all__"
 
 
-class PoemSerializer(NotAllowedModelSerializer):
+class PoemSerializer(LimitFieldModelSerializer):
     class Meta:
         model = Poem
         fields = "__all__"
@@ -38,7 +45,7 @@ class ChapterSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class BookSerializer(NotAllowedModelSerializer):
+class DragDropSelectBookSerializer(LimitFieldModelSerializer):
     class Meta:
-        model = Book
+        model = DragDropSelectBook
         fields = "__all__"

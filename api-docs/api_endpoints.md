@@ -19,7 +19,7 @@ Expected Response Body:
 }
 ```
 
-## **/literatures/categories/stories/**
+## **/literature/categories/stories/**
 Expected Response Body:
 ```json
 [
@@ -33,7 +33,7 @@ Expected Response Body:
 ]
 ```
 
-## **/literatures/categories/poems/**
+## **/literature/categories/poems/**
 ```json
 [
     {
@@ -46,7 +46,7 @@ Expected Response Body:
 ]
 ```
 
-## **/literatures/categories/novels/**
+## **/literature/categories/novels/**
 ```json
 [
     {
@@ -59,15 +59,15 @@ Expected Response Body:
 ]
 ```
 
-## **/literatures/categories/paintings/**
+## **/paintings/**
 ```json
     // Incomplete
 ```
-## **/literatures/categories/songs/**
+## **/musics/**
 ```json
     // Incomplete
 ```
-## **/literatures/categories/recitations/**
+## **/recitations/**
 ```json
     // Incomplete
 ```
