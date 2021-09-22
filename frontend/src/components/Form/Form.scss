@@ -1,39 +1,38 @@
+@import 'src/utils/styles.scss';
+
 .form {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include centreIt(column);
 
     >form {
         padding: 0.6rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
+        width: 100%;
+        max-width: 25em;
+        @include centreIt(column);
 
         >input {
-            width: 120%;
+            // rgb(80, 211, 68);
+
+            width: 100%;
             padding: 0.5rem;
             margin: 0.4rem;
             display: inline-block;
-            border: none;
+            border: 1px solid $primary_dark;
+            border-radius: 5px;
             outline: none;
-            border-bottom: 1px solid rgb(80, 211, 68);
         }
 
         .submit-button {
             border: none;
             cursor: pointer;
-            background-color: rgb(80, 211, 68);
+            background-color: $primary_dark;
+            color: white;
         }
     }
 }
 
 .form-container{
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    @include centreIt(column);
 
     .form-title { 
         font-weight: bold;
