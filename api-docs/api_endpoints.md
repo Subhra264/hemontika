@@ -72,7 +72,7 @@ Expected Response Body:
     // Incomplete
 ```
 
-## **/stories/{{storyId}}/details/**
+## **literature/catagories/stories/{{storyId}}/details/**
 ```json
 {
     "thumbnailPic": "url",
@@ -81,10 +81,11 @@ Expected Response Body:
         "name": "Author", //It can be pseudo-name or full name or even empty string
         "username": "username" //This is must
     },
+    "created_at": "UTC time",
+    "updated_at": "UTC time",
     "rating": "4.3",
     "readTime": "6min",
     "views": "1232342",
-    "publishedOn": "UTC time",
     "category": "Category",
     "tags": [{ "id": "ID", "name": "Tag" }],
     "description": "Description",
@@ -92,7 +93,7 @@ Expected Response Body:
 }
 ```
 
-## **/stories/{{storyId}}/comments/**
+## **literature/catagories/stories/{{storyId}}/comments/**
 ```json
 [
     {
@@ -109,7 +110,7 @@ Expected Response Body:
 ]
 ```
 
-## **/stories/{{storyid}}/comments/{{commentId}}/replies**
+## **literature/catagories/stories/{{storyid}}/comments/{{commentId}}/replies**
 ```json
 // Same as Comments
 ```

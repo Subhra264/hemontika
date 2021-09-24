@@ -4,10 +4,10 @@ from .models import Story, Poem, DragDropSelectBook, Novel, Chapter
 
 class LimitFieldModelSerializer(serializers.ModelSerializer):
     def __init__(self, *args, **kwargs):
-        exclude_fields = kwargs.pop("exclude_fields", None)
-        include_fields = kwargs.pop("include_fields", None)
-        existing = set(self.fields)
         super().__init__(*args, **kwargs)
+        exclude_fields = self.context.get("exclude_fields")
+        include_fields = self.context.get("include_fields")
+        existing = set(self.fields)
         if exclude_fields:
             not_allowed = set(exclude_fields)
             for field in not_allowed:
@@ -15,7 +15,7 @@ class LimitFieldModelSerializer(serializers.ModelSerializer):
                     self.fields.pop(field)
         elif include_fields:
             allowed = set(include_fields)
-            for field in self.fields:
+            for field in existing:
                 if field not in allowed:
                     self.fields.pop(field)
 
@@ -33,7 +33,7 @@ class PoemSerializer(LimitFieldModelSerializer):
         fields = "__all__"
 
 
-class NovelSerializer(serializers.ModelSerializer):
+class NovelSerializer(LimitFieldModelSerializer):
     class Meta:
         model = Novel
         fields = "__all__"

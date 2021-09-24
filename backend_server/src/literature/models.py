@@ -136,7 +136,7 @@ class Chapter(PreLiterature):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        self.front_img = self.novel.front_img if self.front_img is not None else self.front_img
+        self.thumbnail_pic = self.novel.thumbnail_pic if self.thumbnail_pic is not None else self.thumbnail_pic
         # FIXME: the below code for setting `title` value is inefficient. Implement an efficient code instead
         if self.novel.chapter_set.count() > 1:
             chapters = list(self.novel.chapter_set.all())
@@ -146,9 +146,6 @@ class Chapter(PreLiterature):
                     self.title = self.novel.title + " Part- " + str(part_no)
         else:
             self.title = self.novel.title + " Part- 1"
-        if self.tags.count() == 0 and self.novel.tags.count() > 0:
-            for tag in self.novel.tags.all():
-                tag.chapter_set.add(self)
         super().save(*args, **kwargs)
 
     def __str__(self):
