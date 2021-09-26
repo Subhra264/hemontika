@@ -6,10 +6,11 @@ from .serializers import DragDropSelectBookSerializer, NovelSerializer, PoemSeri
 
 # Create your views here.
 
+
 class LiteratureAPIView(GenericAPIView):
     include_fields = None
     exclude_fields = None
-    
+
     def get_serializer_context(self):
         extra_context = super().get_serializer_context()
         if self.include_fields and self.exclude_fields:
@@ -30,14 +31,14 @@ class LiteratureAPIView(GenericAPIView):
         return extra_context
 
     def get_queryset(self):
-        lang = self.request.query_params.get('lang')
+        lang = self.request.query_params.get("lang")
         if lang:
             return super().get_queryset().filter(language=lang)
         return super().get_queryset()
 
 
 class ShortLiteratureListView(ListAPIView, LiteratureAPIView):
-    include_fields = ["thumbnail_pic", "title", "rating", "catagory", "read_time"]
+    include_fields = ["id", "thumbnail_pic", "title", "rating", "catagory", "read_time"]
 
 
 class StoryListView(ShortLiteratureListView):
@@ -53,11 +54,10 @@ class PoemListView(ShortLiteratureListView):
 class NovelListView(ListAPIView, LiteratureAPIView):
     queryset = Novel.objects.all()
     serializer_class = NovelSerializer
-    include_fields = ["thumbnail_pic", "title", "rating", "catagory", "number_of_chapters"]
+    include_fields = ["id", "thumbnail_pic", "title", "rating", "catagory", "number_of_chapters"]
 
 
 class DetailsView(RetrieveAPIView):
-    
     def get_object(self):
         pk = self.kwargs["pk"]
         obj = self.get_queryset().get(pk=pk)
@@ -86,7 +86,8 @@ class BookViewSet(ModelViewSet):
     serializer_class = DragDropSelectBookSerializer
     http_method_names = ["get", "post", "patch", "delete", "head"]
 
-    def get_serializer(self, *args, **kwargs):
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
         if self.action == "list":
-            kwargs["exclude_fields"] = ["novels", "poems", "stories"]
-        return super().get_serializer(*args, **kwargs)
+            context["include_fields"] = ["id", "title", "thumbnail_pic", "rating", "catagory", "number_of_contents"]
+        return context

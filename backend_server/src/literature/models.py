@@ -55,7 +55,6 @@ class ShortLiterature(Literature):
 
 
 class Story(ShortLiterature):
-
     class Meta:
         verbose_name_plural = "Stories"
 

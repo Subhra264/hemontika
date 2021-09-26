@@ -1,6 +1,12 @@
-from literature.models import Story, Poem, Book, Novel, Chapter
+from literature.models import Story, Poem, DragDropSelectBook, Novel, Chapter
 from tag.models import Tag
-from literature.serializers import BookSerializer, NovelSerializer, PoemSerializer, StorySerializer, ChapterSerializer
+from literature.serializers import (
+    DragDropSelectBookSerializer,
+    NovelSerializer,
+    PoemSerializer,
+    StorySerializer,
+    ChapterSerializer,
+)
 from django.test import TestCase
 import pytest, json
 from tempfile import NamedTemporaryFile
@@ -13,7 +19,7 @@ HemontikaUser = get_user_model()
 
 
 def return_image_path(instance):
-    return "/media/" + instance.front_img.name
+    return "/media/" + instance.thumbnail_pic.name
 
 
 @freeze_time("2021-01-01 11:12:13.000000")
@@ -37,11 +43,28 @@ class TestSerializers(TestCase):
         tag2 = Tag.objects.create(name="bengali")
         tag3 = Tag.objects.create(name="short stories")
 
-        story = Story.objects.create(author=self.jack, title="a story about serializer", content="hello all")
+        story = Story.objects.create(
+            author=self.jack,
+            title="a story about serializer",
+            content="hello all",
+            description="This is the description",
+            language="en",
+            catagory="oth",
+        )
         story2 = Story(author=self.jack, title="title", content="sharlock homes")
-        story2.front_img = self.temp_image
+        story2.thumbnail_pic = self.temp_image
+        story2.language = "en"
+        story2.catagory = "oth"
+        story2.description = "This is the description"
         story2.save()
-        Story.objects.create(author=self.john, title="A man with a twisted lip", content="bla bla bla")
+        Story.objects.create(
+            author=self.john,
+            title="A man with a twisted lip",
+            content="bla bla bla",
+            description="This is the description",
+            language="en",
+            catagory="oth",
+        )
         tag.story_set.set([story, story2])
         tag2.story_set.add(story)
         tag3.story_set.add(story)
@@ -51,10 +74,17 @@ class TestSerializers(TestCase):
         data = {
             "id": 1,
             "title": "a story about serializer",
-            "front_img": None,
-            "date": self.DATE,
+            "thumbnail_pic": None,
+            "created_at": self.DATE,
+            "updated_at": self.DATE,
             "content": "hello all",
             "author": 1,
+            "rating": 0.0,
+            "description": "This is the description",
+            "read_time": 0,
+            "language": "en",
+            "catagory": "oth",
+            "views": 0,
             "tags": [1, 2, 3],
         }
         data = json.dumps(data)
@@ -66,52 +96,94 @@ class TestSerializers(TestCase):
             {
                 "id": 1,
                 "title": "a story about serializer",
-                "front_img": None,
-                "date": self.DATE,
+                "thumbnail_pic": None,
+                "created_at": self.DATE,
+                "updated_at": self.DATE,
                 "content": "hello all",
                 "author": 1,
+                "rating": 0.0,
+                "description": "This is the description",
+                "read_time": 0,
+                "language": "en",
+                "catagory": "oth",
+                "views": 0,
                 "tags": [1, 2, 3],
             },
             {
                 "id": 2,
                 "title": "title",
-                "front_img": return_image_path(story2),
-                "date": self.DATE,
+                "thumbnail_pic": return_image_path(story2),
+                "created_at": self.DATE,
+                "updated_at": self.DATE,
                 "content": "sharlock homes",
                 "author": 1,
                 "tags": [1],
+                "rating": 0.0,
+                "description": "This is the description",
+                "read_time": 0,
+                "language": "en",
+                "catagory": "oth",
+                "views": 0,
             },
             {
                 "id": 3,
                 "title": "A man with a twisted lip",
-                "front_img": None,
-                "date": self.DATE,
+                "thumbnail_pic": None,
+                "created_at": self.DATE,
+                "updated_at": self.DATE,
                 "content": "bla bla bla",
                 "author": 2,
                 "tags": [],
+                "rating": 0.0,
+                "description": "This is the description",
+                "read_time": 0,
+                "language": "en",
+                "catagory": "oth",
+                "views": 0,
             },
         ]
+        self.maxDiff = None
         data = json.dumps(data)
         self.assertJSONEqual(json_data, data)
 
     @pytest.mark.django_db
     def test_poem_serializer(self):
         tag = Tag.objects.create(name="poem")
-        poem = Poem.objects.create(author=self.jack, title="blossoms", content=" beautiful blossoms")
+        poem = Poem.objects.create(
+            author=self.jack,
+            title="blossoms",
+            content=" beautiful blossoms",
+            description="This is the description",
+            language="en",
+            catagory="oth",
+        )
         tag.poem_set.add(poem)
-        poem2 = Poem(author=self.john, title="two blossoms", content="hello blossoms")
-        poem2.front_img = self.temp_image
+        poem2 = Poem(
+            author=self.john,
+            title="two blossoms",
+            content="hello blossoms",
+            description="This is the description",
+            language="en",
+            catagory="oth",
+        )
+        poem2.thumbnail_pic = self.temp_image
         poem2.save()
-        Poem.objects.create(author=self.john, title="three blossoms", content="happy blossoms")
         serializer1 = PoemSerializer(poem)
         data = {
             "id": 1,
             "title": "blossoms",
-            "front_img": None,
-            "date": self.DATE,
+            "thumbnail_pic": None,
+            "created_at": self.DATE,
+            "updated_at": self.DATE,
             "content": " beautiful blossoms",
             "author": 1,
             "tags": [1],
+            "rating": 0.0,
+            "description": "This is the description",
+            "read_time": 0,
+            "language": "en",
+            "catagory": "oth",
+            "views": 0,
         }
         data = json.dumps(data)
         json_data = JSONRenderer().render(serializer1.data)
@@ -121,29 +193,34 @@ class TestSerializers(TestCase):
             {
                 "id": 1,
                 "title": "blossoms",
-                "front_img": None,
-                "date": self.DATE,
+                "thumbnail_pic": None,
+                "created_at": self.DATE,
+                "updated_at": self.DATE,
                 "content": " beautiful blossoms",
                 "author": 1,
                 "tags": [1],
+                "rating": 0.0,
+                "description": "This is the description",
+                "read_time": 0,
+                "language": "en",
+                "catagory": "oth",
+                "views": 0,
             },
             {
                 "id": 2,
                 "title": "two blossoms",
-                "front_img": return_image_path(poem2),
-                "date": self.DATE,
+                "thumbnail_pic": return_image_path(poem2),
+                "created_at": self.DATE,
+                "updated_at": self.DATE,
                 "content": "hello blossoms",
                 "author": 2,
                 "tags": [],
-            },
-            {
-                "id": 3,
-                "title": "three blossoms",
-                "front_img": None,
-                "date": self.DATE,
-                "content": "happy blossoms",
-                "author": 2,
-                "tags": [],
+                "rating": 0.0,
+                "description": "This is the description",
+                "read_time": 0,
+                "language": "en",
+                "catagory": "oth",
+                "views": 0,
             },
         ]
         data = json.dumps(data)
@@ -153,13 +230,22 @@ class TestSerializers(TestCase):
     @pytest.mark.django_db
     def test_novel_serializer(self):
         tag = Tag.objects.create(name="novel")
-        novel = Novel.objects.create(author=self.jack, title="A novel NOT about testing")
+        novel = Novel.objects.create(
+            author=self.jack,
+            title="A novel NOT about testing",
+            description="This is the description",
+            language="en",
+            catagory="oth",
+        )
         tag.novel_set.add(novel)
         novel.create_chapter(content="somthing here...")
         novel.create_chapter(content="somthing here too ...")
 
         novel2 = Novel(author=self.john, title="Another novel")
-        novel2.front_img = self.temp_image
+        novel2.thumbnail_pic = self.temp_image
+        novel2.description = "This is the description"
+        novel2.catagory = "oth"
+        novel2.language = "en"
         novel2.create_chapter(content="anything important")
         novel2.create_chapter(content="testing novel serializer")
         novel2.create_chapter(content="hello novel")
@@ -168,13 +254,19 @@ class TestSerializers(TestCase):
         data = {
             "id": 1,
             "title": "A novel NOT about testing",
-            "front_img": None,
-            "date": self.DATE,
+            "thumbnail_pic": None,
+            "created_at": self.DATE,
+            "updated_at": self.DATE,
             "number_of_chapters": 2,
             "author": 1,
             "tags": [
                 1,
             ],
+            "rating": 0.0,
+            "description": "This is the description",
+            "language": "en",
+            "catagory": "oth",
+            "views": 0,
         }
         data = json.dumps(data)
         json_data = JSONRenderer().render(serializer.data)
@@ -185,22 +277,34 @@ class TestSerializers(TestCase):
             {
                 "id": 1,
                 "title": "A novel NOT about testing",
-                "front_img": None,
-                "date": self.DATE,
+                "thumbnail_pic": None,
+                "created_at": self.DATE,
+                "updated_at": self.DATE,
                 "number_of_chapters": 2,
                 "author": 1,
                 "tags": [
                     1,
                 ],
+                "rating": 0.0,
+                "description": "This is the description",
+                "language": "en",
+                "catagory": "oth",
+                "views": 0,
             },
             {
                 "id": 2,
                 "title": "Another novel",
-                "front_img": return_image_path(novel2),
-                "date": self.DATE,
+                "thumbnail_pic": return_image_path(novel2),
+                "created_at": self.DATE,
+                "updated_at": self.DATE,
                 "number_of_chapters": 3,
                 "author": 2,
                 "tags": [],
+                "rating": 0.0,
+                "description": "This is the description",
+                "language": "en",
+                "catagory": "oth",
+                "views": 0,
             },
         ]
         data = json.dumps(data)
@@ -213,7 +317,7 @@ class TestSerializers(TestCase):
         chapter1 = novel.create_chapter(content="hello chapter")
         novel.create_chapter(content="chapter 2")
         novel2 = Novel(author=self.jack, title="another novel for image")
-        novel2.front_img = self.temp_image
+        novel2.thumbnail_pic = self.temp_image
         novel2.save()
         chapter2 = novel2.create_chapter(content="chapter 1")
 
@@ -223,13 +327,12 @@ class TestSerializers(TestCase):
             {
                 "id": 1,
                 "title": "A novel about testing Part- 1",
-                "front_img": None,
-                "date": self.DATE,
+                "thumbnail_pic": None,
+                "created_at": self.DATE,
+                "updated_at": self.DATE,
                 "content": "hello chapter",
-                "author": 1,
                 "previous_chapter": None,
                 "novel": 1,
-                "tags": [],
             }
         )
         self.assertJSONEqual(json_data, data)
@@ -240,35 +343,32 @@ class TestSerializers(TestCase):
             {
                 "id": 1,
                 "title": "A novel about testing Part- 1",
-                "front_img": None,
-                "date": self.DATE,
+                "thumbnail_pic": None,
                 "content": "hello chapter",
-                "author": 1,
+                "created_at": self.DATE,
+                "updated_at": self.DATE,
                 "previous_chapter": None,
                 "novel": 1,
-                "tags": [],
             },
             {
                 "id": 2,
                 "title": "A novel about testing Part- 2",
-                "front_img": None,
-                "date": self.DATE,
+                "thumbnail_pic": None,
+                "created_at": self.DATE,
+                "updated_at": self.DATE,
                 "content": "chapter 2",
-                "author": 1,
                 "previous_chapter": 1,
                 "novel": 1,
-                "tags": [],
             },
             {
                 "id": 3,
                 "title": "another novel for image Part- 1",
-                "front_img": return_image_path(chapter2),
-                "date": self.DATE,
+                "thumbnail_pic": return_image_path(chapter2),
+                "created_at": self.DATE,
+                "updated_at": self.DATE,
                 "content": "chapter 1",
-                "author": 1,
                 "previous_chapter": None,
                 "novel": 2,
-                "tags": [],
             },
         ]
         data = json.dumps(data)
@@ -282,39 +382,58 @@ class TestSerializers(TestCase):
         poem2 = Poem.objects.create(author=self.jack, title="two blossoms", content="happy blossoms")
         story = Story.objects.create(author=self.jack, title="a story about serializer", content="hello all")
 
-        book = Book.objects.create(author=self.jack, title=" a book about testing")
+        book = DragDropSelectBook.objects.create(author=self.jack, title=" a book about testing")
+        book.description = "This is the description"
+        book.language = "en"
+        book.catagory = "oth"
+        book.save()
         book.add_contents([novel, poem1, poem2, story])
-        book2 = Book(author=self.jack, title="publishing a book")
-        book2.front_img = self.temp_image
+        book2 = DragDropSelectBook(author=self.jack, title="publishing a book")
+        book2.description = "This is the description"
+        book2.language = "en"
+        book2.catagory = "oth"
+        book2.thumbnail_pic = self.temp_image
         book2.save()
         book2.add_contents([novel, story])
-        serializer = BookSerializer(book)
+        serializer = DragDropSelectBookSerializer(book)
         json_data = JSONRenderer().render(serializer.data)
 
         data = {
             "id": 1,
             "title": " a book about testing",
-            "front_img": None,
-            "date": self.DATE,
+            "thumbnail_pic": None,
+            "created_at": self.DATE,
+            "updated_at": self.DATE,
             "number_of_contents": 4,
             "author": 1,
             "tags": [],
+            "catagory": "oth",
+            "language": "en",
+            "rating": 0.0,
+            "description": "This is the description",
+            "views": 0,
             "novels": [1],
             "stories": [1],
             "poems": [1, 2],
         }
         data = json.dumps(data)
         self.assertJSONEqual(json_data, data)
-        serializer = BookSerializer(Book.objects.all(), many=True).data
+        serializer = DragDropSelectBookSerializer(DragDropSelectBook.objects.all(), many=True).data
         json_data = JSONRenderer().render(serializer)
         data = [
             {
                 "id": 1,
                 "title": " a book about testing",
-                "front_img": None,
-                "date": self.DATE,
+                "thumbnail_pic": None,
+                "created_at": self.DATE,
+                "updated_at": self.DATE,
                 "number_of_contents": 4,
                 "author": 1,
+                "catagory": "oth",
+                "language": "en",
+                "rating": 0.0,
+                "description": "This is the description",
+                "views": 0,
                 "tags": [],
                 "novels": [1],
                 "stories": [1],
@@ -323,11 +442,17 @@ class TestSerializers(TestCase):
             {
                 "id": 2,
                 "title": "publishing a book",
-                "front_img": return_image_path(book2),
-                "date": self.DATE,
+                "thumbnail_pic": return_image_path(book2),
+                "created_at": self.DATE,
+                "updated_at": self.DATE,
                 "number_of_contents": 2,
                 "author": 1,
                 "tags": [],
+                "catagory": "oth",
+                "language": "en",
+                "rating": 0.0,
+                "description": "This is the description",
+                "views": 0,
                 "novels": [1],
                 "stories": [1],
                 "poems": [],

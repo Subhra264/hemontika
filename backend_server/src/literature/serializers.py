@@ -20,7 +20,6 @@ class LimitFieldModelSerializer(serializers.ModelSerializer):
                     self.fields.pop(field)
 
 
-
 class StorySerializer(LimitFieldModelSerializer):
     class Meta:
         model = Story
