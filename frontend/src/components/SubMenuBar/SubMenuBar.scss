@@ -1,9 +1,87 @@
-.sub-menu-item-icon {
-    path {
-        fill: #45C9C1;
+@import 'src/utils/styles.scss';
+
+.sub-menu-item {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2.3rem;
+    height: 2.3rem;
+    border-radius: 50%;
+    background-color: $primary_dark;
+    transform: translate(-50%, -50%);
+
+    .sub-menu-item-icon {
+        @include centerIt();
+        height: 100%;
+
+        svg {
+            width: 85%;
+        }
+
+        path {
+            fill: $secondary_light;
+        }
+    }
+    
+    .sub-menu-item-label {
+        color: $secondary_light;
+        font-size: 0.8em;
+        margin: auto;
     }
 }
 
-.sub-menu-item-label {
-    color: #45C9C1;
+.sub-menu-items-show {
+    .sub-menu-item {
+        &:nth-child(1) {
+            left: -90%;
+        }
+    
+        &:nth-child(2) {
+            top: -45%;
+            left: -45%;
+        }
+    
+        &:nth-child(3) {
+            top: -90%;
+        }
+    
+        &:nth-child(4) {
+            left: 145%;
+            top: -45%;
+        }
+    
+        &:nth-child(5) {
+            left: 190%;
+        }
+    }
+}
+
+.sub-menu-bar {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background-color: $primary_dark;
+    position: fixed;
+    bottom: 3%;
+    left: 48%;
+
+    .sub-menu-switch {
+        width: 75%;
+        height: 75%;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        background: #945656;
+        transform: translate(-50%, -50%);
+        z-index: 500;
+    }
+}
+
+.mobile {
+    .sub-menu-item {
+        .sub-menu-item-icon {
+            height: auto;
+        }
+    }
 }

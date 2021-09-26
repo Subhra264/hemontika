@@ -6,6 +6,7 @@ import { ReactComponent as HomeIcon } from '../../assets/imgs/icon_home.svg';
 import { ReactComponent as PopularIcon } from '../../assets/imgs/icon_trending.svg';
 import { ReactComponent as ProfileIcon } from '../../assets/imgs/icon_profile.svg';
 import './SubMenuBar.scss';
+import useViewport from '../../hooks/useViewport';
 
 interface SubMenuItemProps {
     icon: JSX.Element
@@ -14,15 +15,20 @@ interface SubMenuItemProps {
 }
 
 const SubMenuItem: React.FC<SubMenuItemProps> = (props) => {
+    const { isMobile } = useViewport();
+
     return (
-        <div className="sub-menu-item">
+        <div className="sub-menu-item" title={props.label}>
             <Link to={props.linkTo}>
                 <div className="sub-menu-item-icon">
                     {props.icon}
                 </div>
-                <div className="sub-menu-item-label">
-                    {props.label}
-                </div>
+                {
+                    isMobile &&
+                        <div className="sub-menu-item-label">
+                            {props.label}
+                        </div>
+                }
             </Link>
         </div>
     );

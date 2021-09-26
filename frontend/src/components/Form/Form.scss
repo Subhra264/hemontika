@@ -1,13 +1,13 @@
 @import 'src/utils/styles.scss';
 
 .form {
-    @include centreIt(column);
+    @include centerIt(column);
 
     >form {
         padding: 0.6rem;
         width: 100%;
         max-width: 25em;
-        @include centreIt(column);
+        @include centerIt(column);
 
         >input {
             // rgb(80, 211, 68);
@@ -32,7 +32,7 @@
 
 .form-container{
     height: 100%;
-    @include centreIt(column);
+    @include centerIt(column);
 
     .form-title { 
         font-weight: bold;
