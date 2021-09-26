@@ -1,5 +1,6 @@
 from django.db import models
 from tag.models import Tag
+from hemontika_api import LANGUAGE_CHOICES, CATAGORY_CHOICES
 from django.conf import settings
 
 # Create your models here.
@@ -9,16 +10,28 @@ def unique_file_path(instance, filename):
     return "literature/{}/_{}_{}".format(type(instance).__name__, instance.author.id, filename)
 
 
-class Literature(models.Model):
+class PreLiterature(models.Model):
+    title = models.CharField(max_length=50)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    thumbnail_pic = models.ImageField(upload_to=unique_file_path, blank=True, null=True)
+
+    class Meta:
+        abstract = True
+
+
+class Literature(PreLiterature):
     # basic fields for every literature
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    title = models.CharField(max_length=50)
-    front_img = models.ImageField(upload_to=unique_file_path, blank=True, null=True)
-    date = models.DateTimeField(auto_now_add=True)
+    rating = models.FloatField(default=0.0)
+    description = models.CharField(max_length=300)
+    language = models.CharField(choices=LANGUAGE_CHOICES, max_length=50)
+    catagory = models.CharField(choices=CATAGORY_CHOICES, max_length=50)
     tags = models.ManyToManyField(Tag, blank=True)
+    views = models.PositiveIntegerField(default=0)
 
     def delete(self, *args, **kwargs):
-        all_related_books = self.book_set.all() if hasattr(self, "book_set") else None
+        all_related_books = self.dragdropselectbook_set.all() if hasattr(self, "dragdropselectbook_set") else None
         if all_related_books:
             super().delete(*args, **kwargs)
             for book in list(all_related_books):
@@ -30,21 +43,24 @@ class Literature(models.Model):
         abstract = True
 
 
-class Story(Literature):
+class ShortLiterature(Literature):
     content = models.TextField()
+    read_time = models.PositiveIntegerField(default=0)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.title
 
+    class Meta:
+        abstract = True
+
+
+class Story(ShortLiterature):
     class Meta:
         verbose_name_plural = "Stories"
 
 
-class Poem(Literature):
-    content = models.TextField()
-
-    def __str__(self):
-        return self.title
+class Poem(ShortLiterature):
+    pass
 
 
 class Novel(Literature):
@@ -101,8 +117,7 @@ class Novel(Literature):
         self.save()
 
 
-class Chapter(Literature):
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+class Chapter(PreLiterature):
     content = models.TextField()
     previous_chapter = models.OneToOneField(
         "self", models.SET_NULL, default=None, null=True, blank=True, related_name="next_chapter"
@@ -120,7 +135,7 @@ class Chapter(Literature):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        self.front_img = self.novel.front_img if self.front_img is not None else self.front_img
+        self.thumbnail_pic = self.novel.thumbnail_pic if self.thumbnail_pic is not None else self.thumbnail_pic
         # FIXME: the below code for setting `title` value is inefficient. Implement an efficient code instead
         if self.novel.chapter_set.count() > 1:
             chapters = list(self.novel.chapter_set.all())
@@ -130,22 +145,16 @@ class Chapter(Literature):
                     self.title = self.novel.title + " Part- " + str(part_no)
         else:
             self.title = self.novel.title + " Part- 1"
-
-        if not self.author:
-            self.author = self.novel.author
-        if self.tags.count() == 0 and self.novel.tags.count() > 0:
-            for tag in self.novel.tags.all():
-                tag.chapter_set.add(self)
         super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title
 
     class Meta:
-        ordering = ["date"]
+        ordering = ["updated_at"]
 
 
-class Book(Literature):
+class DragDropSelectBook(Literature):
     number_of_contents = models.PositiveIntegerField(default=0)
     novels = models.ManyToManyField(Novel, blank=True)
     stories = models.ManyToManyField(Story, blank=True)
@@ -180,11 +189,10 @@ class Book(Literature):
         self.number_of_contents = number_of_contents
         self.save()
 
-    # def save(self,*args,**kwargs):
-    #     if self.number_of_contents > 0:
-    #         super().save(*args,**kwargs)
-    #     else:
-    #         raise Exception('no content provided')
-
     def __str__(self):
         return self.title
+
+
+# class ScratchBook(Literature):
+#     content = models.TextField()
+#     # TODO: we have to add chapter field also.
