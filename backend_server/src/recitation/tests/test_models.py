@@ -33,5 +33,3 @@ class TestModels(TestCase):
         self.assertEqual(john.recitation_set.count(), 3)
         with transaction.atomic():
             self.assertRaises(Exception, Recitation.objects.create(reciter=john, title="no audio files"))
-        # TODO: test cases related to required and default fields should also be added
-        # TODO: have to add test cases for audio(file) and image fields

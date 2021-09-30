@@ -17,6 +17,7 @@ class TestModels(TestCase):
         )
         tag = Tag.objects.create(name="oil painting")
         oil_paint = Art(artist=john, title="How to paint like Bob Ross?")
+        oil_paint.description = "this is the description"
         oil_paint.image = SimpleUploadedFile(
             name="test_art.png", content=open(image_path, "rb").read(), content_type="image"
         )
@@ -24,6 +25,11 @@ class TestModels(TestCase):
         tag.art_set.add(oil_paint)
         self.assertEqual(oil_paint.title, "How to paint like Bob Ross?")
         self.assertEqual(oil_paint.tags.get(id=1), tag)
+        self.assertEqual(oil_paint.rating, 0.0)
+        self.assertEqual(oil_paint.views, 0)
+        self.assertFalse(bool(oil_paint.region))
+        self.assertFalse(bool(oil_paint.district))
+        self.assertFalse(bool(oil_paint.country))
         self.assertRegex(oil_paint.image.name, r"images/arts/_1_test_art()|(_([0-9a-zA-Z]){7}).png")
         with transaction.atomic():
             self.assertRaises(Exception, Art.objects.create(artist=john, title="I wanna paint!"))
