@@ -6,7 +6,9 @@ from rest_framework.utils import json
 from recitation.models import Recitation
 from freezegun import freeze_time
 from django.contrib.auth import get_user_model
+from pytest import importorskip
 
+importorskip("random_hello")
 HemontikaUser = get_user_model()
 
 

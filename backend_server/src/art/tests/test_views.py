@@ -6,7 +6,9 @@ from django.core.files import File
 from freezegun import freeze_time
 from tempfile import NamedTemporaryFile
 import json
+from pytest import importorskip
 
+importorskip("random_hello")
 HemontikaUser = get_user_model()
 
 

@@ -12,6 +12,7 @@ LANGUAGE_CHOICES = [
     ("mr", "Marathi"),
     ("mni", "Meitei"),
     ("nep", "Nepali"),
+    ("nls", "Not_lang_spec"),
     ("ori", "Oriya"),
     ("pan", "Panjabi"),
     ("ta", "Tamil"),
@@ -27,5 +28,6 @@ CATAGORY_CHOICES = [
     ("hor", "horror"),
     ("mys", "mystry"),
     ("oth", "others"),
+    ("pat", "patriotism"),
     ("rom", "romance"),
 ]
