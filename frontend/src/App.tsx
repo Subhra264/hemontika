@@ -1,4 +1,5 @@
 import './App.scss';
+import './utils/font-awesome';
 import { Switch, Route } from 'react-router-dom';
 import LogIn from './components/LogIn/LogIn';
 import SignUp from './components/SignUp/SignUp';
