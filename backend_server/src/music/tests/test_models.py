@@ -17,13 +17,17 @@ class TestModels(TestCase):
         temp_video = File(NamedTemporaryFile(suffix="mp4"))
         temp_video.name = "test_music.mp4"
         music.video = temp_video
+        music.description = "this is the description"
         music.save()
         tag = Tag.objects.create(name="Indian Classical Music")
         tag.music_set.add(music)
         self.assertRegex(music.video.name, r"videos/musics/_1_test_music()|(_([0-9a-zA-z]){7}).mp4")
-        Music.objects.create(musician=john, title="another title song")
-        Music.objects.create(musician=john, title="bad songs of the year")
+        Music.objects.create(musician=john, title="another title song", description="this is the description")
+        Music.objects.create(musician=john, title="bad songs of the year", description="this is the description")
         self.assertEqual(tag.music_set.count(), 1)
+        self.assertFalse(bool(music.region))
+        self.assertFalse(bool(music.district))
+        self.assertFalse(bool(music.country))
+        self.assertFalse(bool(music.language))
         self.assertEqual(music.tags.get(id=1), tag)
         self.assertEqual(john.music_set.count(), 3)
-        # TODO: add test case for video upload

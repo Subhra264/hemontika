@@ -1,3 +1,4 @@
+from _pytest.outcomes import importorskip
 from rest_framework.renderers import JSONRenderer
 from rest_framework.utils import json
 from art.serializers import ArtSerializer
@@ -10,6 +11,7 @@ from freezegun import freeze_time
 from tempfile import NamedTemporaryFile
 
 HemontikaUser = get_user_model()
+importorskip("random_hello")
 
 
 @freeze_time("2021-01-01 11:12:13.000000")
