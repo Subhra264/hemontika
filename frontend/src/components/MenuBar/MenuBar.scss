@@ -1,0 +1,55 @@
+@import 'src/utils/styles.scss';
+
+.menu-bar-container {
+    .menu-icon-container {
+        position: relative;
+
+        .menu-icon {
+            border-radius: 50%;
+            width: 2.7rem;
+            height: 2.7rem;
+            @include centerIt(column);
+            padding: 0.1rem;
+            overflow: hidden;
+            cursor: pointer;
+            position: absolute;
+            top: 38%;
+
+            .bar{
+                content: '';
+                width: 2rem;
+                height: 0.1rem;
+                transform: rotate(0deg);
+                background-color: $primary_light;
+                box-shadow: 0 -0.5rem 0 $primary_light, 
+                            0 0.5rem 0 $primary_light;
+                transition-property: transform,box-shadow;
+                transition: 0.5s, 1s;
+            }
+
+            &::before {
+                transition: 1s;
+            }
+
+            &.active {
+
+                .bar {
+                    box-shadow:0 -4rem 0 $primary_light,
+                                0 4rem 0 $primary_light;
+                    transform: rotate(315deg);
+                }
+
+                &::before {
+                    content: '';
+                    width: 2rem;
+                    height: 0.1rem;
+                    background-color: $primary_light;
+                    transform: translate(-50%,-50%) rotate(45deg);
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                }
+            }
+        }
+    }
+}
