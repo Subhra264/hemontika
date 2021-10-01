@@ -20,6 +20,7 @@ import {
     // faMapMarkerAlt,
     // faUserCircle,
     // faUsers,
+    faBars,
     faEllipsisH,
     faTimes
 } from '@fortawesome/free-solid-svg-icons';
@@ -54,6 +55,7 @@ library.add(
     // faMapMarkerAlt,
     // faUserCircle,
     // faUsers,
+    faBars,
     faEllipsisH,
     faTimes
 );
