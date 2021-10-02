@@ -1,6 +1,6 @@
 import './MenuBar.scss';
-import { ReactComponent as MenuIconContainer } from '../../assets/imgs/svg_menu_container.svg';
 import React, { useState } from 'react';
+import MenuIcon from './MenuIcon/MenuIcon';
 
 const MenuBar: React.FC = (props): JSX.Element => {
     const [showMenu, setShowMenu] = useState(false);
@@ -11,11 +11,13 @@ const MenuBar: React.FC = (props): JSX.Element => {
 
     return (
         <div className="menu-bar-container">
-            <div className="menu-icon-container">
-                <MenuIconContainer  />
-                <div className={`menu-icon ${showMenu? 'active' : ''}`} onClick={switchShowMenu}>
-                    <div className="bar"></div>
+            <div className="menu-bar">
+                <div className="menu-logo">LOGO</div>
+                <div className="menu-buttons">
+                    <button>Log In</button>
+                    <button>Sign Up</button>
                 </div>
+                <MenuIcon showMenu={showMenu} switchShowMenu={switchShowMenu} />
             </div>
         </div>
     );
