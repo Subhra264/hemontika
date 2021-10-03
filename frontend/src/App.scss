@@ -6,6 +6,18 @@
     height: 100%;
     color: $primary_dark;
     font-family: 'Poppins';
+
+    button {
+        display: inline-block;
+        background-color: $primary_dark;
+        color: $primary_light;
+        padding: 0.5rem 0.9rem;
+        border-radius: 0.3rem;
+        text-align: center;
+        border: none;
+        outline: none;
+        margin: 0.4rem;
+    }
 }
 
 #root {

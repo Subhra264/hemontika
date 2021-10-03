@@ -18,7 +18,9 @@ from recitation.serializers import (
     UpdateRecitationSerializer,
 )
 from freezegun import freeze_time
+from pytest import importorskip
 
+importorskip("random_hello")
 HemontikaUser = get_user_model()
 
 

@@ -1,4 +1,4 @@
-@mixin centreIt($flexDirection: row) {
+@mixin centerIt($flexDirection: row) {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,3 +13,5 @@
 $primary_dark: #3D3E61;
 $primary_light: #E8F3DC;
 $primary_yellowOchre_light: #BFEE04;
+
+$secondary_light: #45C9C1; // Disabled color
