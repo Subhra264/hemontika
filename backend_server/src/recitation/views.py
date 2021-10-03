@@ -2,7 +2,12 @@ from rest_framework import status
 from rest_framework.exceptions import NotAcceptable
 from rest_framework.response import Response
 from .models import Recitation
-from .serializers import CreateDestroyRecitationSerializer, ListRecitationSerializer, RetrieveRecitationSerializer, UpdateRecitationSerializer
+from .serializers import (
+    CreateDestroyRecitationSerializer,
+    ListRecitationSerializer,
+    RetrieveRecitationSerializer,
+    UpdateRecitationSerializer,
+)
 from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveUpdateDestroyAPIView
 
 
