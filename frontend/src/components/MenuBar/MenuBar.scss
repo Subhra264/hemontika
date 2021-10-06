@@ -1,5 +1,14 @@
-// @import 'src/utils/styles.scss';
+@import 'src/utils/styles.scss';
 
-// .menu-bar-container {
-    
-// }
+.menu-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.4rem 1.5rem;
+    background-color: rgba(255, 255, 255, 0.699);
+
+}

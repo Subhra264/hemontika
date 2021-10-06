@@ -16,7 +16,7 @@ const MenuIcon: React.FC<MenuIconProps> = (props) => {
                     <div className="bar"></div>
                 </div>
             </div>
-            <Menu />
+            <Menu showMenu={props.showMenu} />
         </div>
     );
 };

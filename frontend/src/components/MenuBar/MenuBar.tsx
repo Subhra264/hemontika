@@ -10,15 +10,13 @@ const MenuBar: React.FC = (props): JSX.Element => {
     };
 
     return (
-        <div className="menu-bar-container">
-            <div className="menu-bar">
-                <div className="menu-logo">LOGO</div>
-                <div className="menu-buttons">
-                    <button>Log In</button>
-                    <button>Sign Up</button>
-                </div>
-                <MenuIcon showMenu={showMenu} switchShowMenu={switchShowMenu} />
+        <div className="menu-bar">
+            <div className="menu-logo">LOGO</div>
+            <div className="menu-buttons">
+                <button>Log In</button>
+                <button>Sign Up</button>
             </div>
+            <MenuIcon showMenu={showMenu} switchShowMenu={switchShowMenu} />
         </div>
     );
 };
