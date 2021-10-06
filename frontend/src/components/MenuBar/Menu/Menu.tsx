@@ -1,9 +1,13 @@
 import { Link } from 'react-router-dom';
 import './Menu.scss';
 
-const Menu: React.FC = (props) => {
+interface MenuProps {
+    showMenu: boolean;
+}
+
+const Menu: React.FC<MenuProps> = (props) => {
     return (
-        <div className="menu">
+        <div className={`menu ${props.showMenu? '' : 'hide-menu'}`}>
             <div className="menu-links">
                 <div className="menu-link">
                     <Link to='/home'>Home</Link>
