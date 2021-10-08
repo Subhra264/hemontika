@@ -12,7 +12,7 @@ const MenuBar: React.FC = (props): JSX.Element => {
     return (
         <div className="menu-bar">
             <div className="menu-logo">LOGO</div>
-            <div className="menu-buttons">
+            <div className="menu-bar-buttons">
                 <button>Log In</button>
                 <button>Sign Up</button>
             </div>
