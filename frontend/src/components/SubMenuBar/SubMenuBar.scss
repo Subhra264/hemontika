@@ -58,7 +58,8 @@
     background-color: $primary_dark;
     position: fixed;
     bottom: 3%;
-    left: 48%;
+    left: 50%;
+    transform: translate(-50%, 0);
 
     .sub-menu-switch {
         width: 75%;
@@ -108,9 +109,44 @@
 }
 
 .mobile {
-    .sub-menu-item {
-        .sub-menu-item-icon {
-            height: auto;
+    .sub-menu-bar {
+        padding: 0.9rem 0.6rem;
+        width: auto; 
+        height: auto;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-radius: 2rem 2rem 0 0;
+        transform: none;
+
+        .sub-menu-switch {
+            display: none;
+        }
+
+        .sub-menu-items {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            
+            .sub-menu-item {
+                position: relative;
+                top: 0;
+                left: 0;
+                width: auto;
+                height: auto;
+                border-radius: 0;
+                transform: none;
+                transition: none;
+
+                .sub-menu-item-icon {
+                    height: auto;
+                }
+
+                a {
+                    text-decoration: none;
+                }
+            }
         }
     }
 }
