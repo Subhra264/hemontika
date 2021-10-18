@@ -49,6 +49,18 @@
         font-size: 0.8em;
         margin: auto;
     }
+
+    &.active {
+        .sub-menu-item-icon {
+            path {
+                fill: white;
+            }
+        }
+
+        .sub-menu-item-label {
+            color: white;
+        }
+    }
 }
 
 .sub-menu-bar {
