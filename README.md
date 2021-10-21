@@ -39,7 +39,7 @@ Run the following command to install all python package requirements -
 pip install -r requirements.txt
 ```
 ### install npm dependencies 
-Now if everything is fine, change your current directory from `backend_server` to `frontend` - `cd ../frontend`. Now run `yarn`. It will install all the npm dependencies for the application. 
+Now if everything is fine, change your current directory from `backend_server` to `frontend` - `cd ../frontend`. Now run `yarn`. It will install all the npm dependencies for the application.
 ### Run the front end
 Run the `yarn start` command on the terminal and you will be able to see the front end part at `127.0.0.1:3000`.
 ### Run the server
@@ -50,9 +50,9 @@ Contributions are welcome. Feel free to create issues as well as PRs to make thi
 
 # Tests
 We mainly prefer test driven development. So before adding any new code, try to write tests first. Then do changes until the tests pass. This makes our code less buggy.
-Before commiting any changes make sure it passes all the tests. 
+Before commiting any changes make sure it passes all the tests.
 ### Running python tests
-Go to `backend_server/src` on your terminal and run the command - 
+Go to `backend_server/src` on your terminal and run the command -
 ```bash
 pytest .
 ```

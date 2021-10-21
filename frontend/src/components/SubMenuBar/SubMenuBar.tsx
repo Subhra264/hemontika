@@ -40,6 +40,7 @@ const SubMenuBar: React.FC = (props) => {
     const [showItems, setShowItems] = useState(false);
     const [activeLinkIndex, setActiveLinkIndex] = useState(2);
     const location = useLocation();
+    const { isMobile } = useViewport();
     const menuItems = useRef([
         { linkTo: '/write', label: 'Write', icon: <WriteIcon /> },
         { linkTo: '/explore', label: 'Explore', icon: <ExploreIcon /> },
@@ -50,12 +51,9 @@ const SubMenuBar: React.FC = (props) => {
 
     const getCurrRouteIndex = (): number => {
         let currentRouteIndex = 2;
-        console.log('Location', location);
 
         for (let i = 0; i < menuItems.current.length; i++) {
             const linkTo = menuItems.current[i].linkTo;
-            console.log('getCurrRouteIndex linkTo', linkTo);
-            console.log('getCurrRouteIndex location.pathname', location.pathname);
             if (linkTo === location.pathname
                 || (linkTo !== '/'
                     && location.pathname.startsWith(linkTo)
@@ -64,7 +62,6 @@ const SubMenuBar: React.FC = (props) => {
                 break;
             }
         }
-        console.log('getCurrRouteIndex current index', currentRouteIndex);
         return currentRouteIndex;
     };
 
@@ -82,7 +79,7 @@ const SubMenuBar: React.FC = (props) => {
             <div className="sub-menu-switch" onClick={switchMenuItems}>
                 <FontAwesomeIcon icon={`${showItems? 'times' : 'ellipsis-h'}`} height='85%' width='85%'/>
             </div>
-            <div className={`sub-menu-items ${showItems? 'show-sub-menu-items' : ''}`}>
+            <div className={`sub-menu-items ${!isMobile && showItems? 'show-sub-menu-items' : ''}`}>
                 {
                     menuItems.current.map((menuItem, index) => {
                         let active = false;

@@ -67,7 +67,7 @@ export default function SignUp (props: any) {
                 type: 'email',
                 required: true,
                 onChange: changeEmail
-            }, 
+            },
             firstName:{
                 type: 'text',
                 required: false,

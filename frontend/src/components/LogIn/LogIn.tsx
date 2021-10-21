@@ -57,7 +57,7 @@ export default function LogIn(props: any) {
                 onChange: changeEmail
             }
         },
-        onSubmit: logIn, 
+        onSubmit: logIn,
         error
     };
 

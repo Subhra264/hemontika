@@ -2,7 +2,7 @@
 
 
 ## **/profile/{{profileId}}/**
-Expected Response Body: 
+Expected Response Body:
 ```json
 {
     "profilePic": "url",
@@ -13,9 +13,9 @@ Expected Response Body:
     "country": "Unknown",
     "city": "City",
     "publishedPoems": "24",
-    "publishedStories": "45", 
-    "publishedBooks": "45", 
-    "publishedNovels": "45", 
+    "publishedStories": "45",
+    "publishedBooks": "45",
+    "publishedNovels": "45",
 }
 ```
 

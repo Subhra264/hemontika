@@ -21,7 +21,7 @@ export default function Feed(props: any) {
     return (
         <div className='poem-container'>
             {
-                // poems? 
+                // poems?
                 //     poems.map((poem) => (
                 //         <div key={poem.id} className='poem'>
                 //             <h3>{poem.title}</h3>

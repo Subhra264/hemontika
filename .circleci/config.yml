@@ -11,7 +11,7 @@ jobs:
       - run:
           name: Build code
           command: docker-compose build
-  
+
   test_py:
 
     docker:

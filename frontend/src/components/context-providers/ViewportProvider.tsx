@@ -1,7 +1,7 @@
 import { ViewportContext } from '../../utils/contexts';
 import { useState, useEffect } from 'react';
 
-const ViewportProvider: React.FC = ({ children }) => { 
+const ViewportProvider: React.FC = ({ children }) => {
     const [width, setWidth] = useState<null | number>(null);
     const [height, setHeight] = useState<null | number>(null);
 

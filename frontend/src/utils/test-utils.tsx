@@ -8,7 +8,7 @@ interface RouterWrappedRenderOptions extends RenderOptions {
 
 interface WrappedWithMemRouterProps extends RouterWrappedRenderOptions{
     children?: React.ReactNode;
-} 
+}
 
 const WrappedWithMemRouter: React.FC<WrappedWithMemRouterProps> = (props) => {
     return (

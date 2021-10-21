@@ -14,7 +14,7 @@ const Card: React.FC = (props) => {
                 </div>
                 <div className="card-read-time">6 min read</div>
             </div>
-        </div> 
+        </div>
     );
 };
 
