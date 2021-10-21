@@ -42,7 +42,7 @@ const SubMenuBar: React.FC = (props) => {
     const location = useLocation();
     const { isMobile } = useViewport();
     const menuItems = useRef([
-        { linkTo: '/write', label: 'Write', icon: <WriteIcon /> },
+        { linkTo: '/publish', label: 'Publish', icon: <WriteIcon /> },
         { linkTo: '/explore', label: 'Explore', icon: <ExploreIcon /> },
         { linkTo: '/home', label: 'Home', icon: <HomeIcon /> },
         { linkTo: '/popular', label: 'Popular', icon: <PopularIcon /> },
