@@ -7,6 +7,8 @@ import Card from './components/Cards/Card';
 import useViewport from './hooks/useViewport';
 import SubMenuBar from './components/SubMenuBar/SubMenuBar';
 import MenuBar from './components/MenuBar/MenuBar';
+import ProtectedRoute from './components/ProtectedRoute';
+import PublishRouter from './components/Publish/PublishRouter';
 
 function App() {
   const { isMobile, width } = useViewport();
@@ -15,10 +17,8 @@ function App() {
 
   return (
     <div className={`App ${isMobile? 'mobile' : ''}`}>
-      <Card />
-      <SubMenuBar />
-      <button>Log In</button>
       <MenuBar />
+      <SubMenuBar />
       <Switch>
         <Route path='/log-in'>
           <LogIn />
@@ -26,6 +26,9 @@ function App() {
         <Route path='/sign-up'>
           <SignUp />
         </Route>
+        <ProtectedRoute path='/publish'>
+          <PublishRouter />
+        </ProtectedRoute>
       </Switch>
     </div>
   );

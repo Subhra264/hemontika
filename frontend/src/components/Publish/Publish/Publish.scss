@@ -1,0 +1,42 @@
+@import 'src/utils/styles.scss';
+
+.publish {
+    h2 {
+        margin: 0.8rem 0;
+    }
+
+    .pending-works {
+        display: flex;
+        /* flex-basis: 50%; */
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+
+        .pending-work {
+            min-width: 20rem;
+            background-color: $primary_light;
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.2rem 0.4rem;
+            margin: 0.4rem;
+
+            .mobile & {
+                width: 100%;
+                min-width: none;
+            }
+
+            .pending-work-title {
+                display: inline-block;
+                padding: 0.5em;
+                flex-grow: 9;
+            }
+
+            .pending-work-type {
+                text-align: center;
+                padding: 0.5rem;
+                flex-grow: 1;
+                border-left: 1px solid;
+            }
+        }
+    }
+}
