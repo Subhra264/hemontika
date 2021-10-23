@@ -5,59 +5,100 @@ import './Publish.scss';
 const Publish: React.FC = (props) => {
     return (
         <ResponsiveWrapper className="publish">
-            <div>
-                <h2>Continue Editing</h2>
-                <div className="pending-works">
-                    <div className="pending-work">
-                        <span className="pending-work-title">
-                            <Link to='/abc'>Title</Link>
-                        </span>
-                        <span className="pending-work-type">
+            <section>
+                <h2>
+                    <div className="h2-heading">
+                        Continue Editing
+                    </div>
+                </h2>
+                <div className="publish-sec-items">
+                    <div className="publish-sec-item">
+                        <Link to='/abc' className="publish-sec-item-title">
+                            Title
+                        </Link>
+                        <span className="publish-sec-item-type">
                             Story
                         </span>
                     </div>
-                    <div className="pending-work">
-                        <span className="pending-work-title">
+                    <div className="publish-sec-item">
+                        <span className="publish-sec-item-title">
                             <Link to='/abc'>Title</Link>
                         </span>
-                        <span className="pending-work-type">
+                        <span className="publish-sec-item-type">
                             Story
                         </span>
                     </div>
-                    <div className="pending-work">
-                        <span className="pending-work-title">
+                    <div className="publish-sec-item">
+                        <span className="publish-sec-item-title">
                             <Link to='/abc'>Title</Link>
                         </span>
-                        <span className="pending-work-type">
+                        <span className="publish-sec-item-type">
                             Story
                         </span>
                     </div>
-                    <div className="pending-work">
-                        <span className="pending-work-title">
+                    <div className="publish-sec-item">
+                        <span className="publish-sec-item-title">
                             <Link to='/abc'>Title</Link>
                         </span>
-                        <span className="pending-work-type">
+                        <span className="publish-sec-item-type">
                             Story
                         </span>
                     </div>
-                    <div className="pending-work">
-                        <span className="pending-work-title">
+                    <div className="publish-sec-item">
+                        <span className="publish-sec-item-title">
                             <Link to='/abc'>Title</Link>
                         </span>
-                        <span className="pending-work-type">
+                        <span className="publish-sec-item-type">
                             Story
                         </span>
                     </div>
                 </div>
-            </div>
-            <div>
-                <h2>Publish New</h2>
-                <div className="publish-new-options">
-                    <div className="publish-new-option">
-                        <Link to='/new-poem'>Write a Poem</Link>
+            </section>
+            <section>
+                <h2>
+                    <div className="h2-heading">
+                        Publish New
+                    </div>
+                </h2>
+                <div className="publish-sec-items">
+                    <div className="publish-sec-item publish-option">
+                        <span className="publish-sec-item-title">
+                            {/* <Link to='/new-poem'>Write a Poem</Link> */}
+                            Write a Poem
+                        </span>
+                        <Link to='/new-poem' className="publish-sec-item-type">
+                            &gt;
+                        </Link>
+                    </div>
+                    <div className="publish-sec-item publish-option">
+                        <span className="publish-sec-item-title">
+                            {/* <Link to='/new-poem'>Write a Poem</Link> */}
+                            Write a Poem
+                        </span>
+                        <Link to='/new-poem' className="publish-sec-item-type">
+                            &gt;
+                        </Link>
+                    </div>
+                    <div className="publish-sec-item publish-option">
+                        <span className="publish-sec-item-title">
+                            {/* <Link to='/new-poem'>Write a Poem</Link> */}
+                            Write a Poem
+                        </span>
+                        <Link to='/new-poem' className="publish-sec-item-type">
+                            &gt;
+                        </Link>
+                    </div>
+                    <div className="publish-sec-item publish-option">
+                        <span className="publish-sec-item-title">
+                            {/* <Link to='/new-poem'>Write a Poem</Link> */}
+                            Write a Poem
+                        </span>
+                        <Link to='/new-poem' className="publish-sec-item-type">
+                            &gt;
+                        </Link>
                     </div>
                 </div>
-            </div>
+            </section>
         </ResponsiveWrapper>
     );
 };

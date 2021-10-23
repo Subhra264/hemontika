@@ -3,40 +3,54 @@
 .publish {
     h2 {
         margin: 0.8rem 0;
+
+        .h2-heading {
+            padding: 0.2rem 0.5rem 0.2rem 0;
+            display: inline-block;
+            border-bottom: 1px solid $primary_dark;
+        }
     }
 
-    .pending-works {
-        display: flex;
-        /* flex-basis: 50%; */
-        flex-wrap: wrap;
-        justify-content: space-evenly;
+    .publish-sec-items {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
 
-        .pending-work {
-            min-width: 20rem;
+        .publish-sec-item {
             background-color: $primary_light;
-            display: inline-flex;
-            align-items: center;
-            justify-content: space-between;
+            display: inline-grid;
+            grid-template-columns: 3fr 1fr;
             padding: 0.2rem 0.4rem;
             margin: 0.4rem;
+            max-width: 25rem;
 
-            .mobile & {
-                width: 100%;
-                min-width: none;
-            }
-
-            .pending-work-title {
+            .publish-sec-item-title {
                 display: inline-block;
                 padding: 0.5em;
-                flex-grow: 9;
             }
 
-            .pending-work-type {
+            .publish-sec-item-type {
                 text-align: center;
                 padding: 0.5rem;
-                flex-grow: 1;
                 border-left: 1px solid;
             }
+
+            &.publish-option {
+                background-color: $primary_yellowOchre_light;
+
+                .publish-sec-item-title {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .publish-sec-item-type {
+                    font-size: 1.5em;
+                }
+            }
+        }
+
+        .mobile & {
+            grid-template-columns: 1fr;
         }
     }
 }
