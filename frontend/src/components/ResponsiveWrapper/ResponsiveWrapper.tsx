@@ -1,7 +1,7 @@
 import './ResponsiveWrapper.scss';
 
 interface ResponsiveWrapperProps {
-    className: string;
+    className?: string;
 }
 
 const ResponsiveWrapper: React.FC<ResponsiveWrapperProps> = (props) => {

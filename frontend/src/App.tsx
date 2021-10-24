@@ -9,6 +9,7 @@ import SubMenuBar from './components/SubMenuBar/SubMenuBar';
 import MenuBar from './components/MenuBar/MenuBar';
 import ProtectedRoute from './components/ProtectedRoute';
 import PublishRouter from './components/Publish/PublishRouter';
+import AllPosts from './components/AllPosts/AllPosts';
 
 function App() {
   const { isMobile, width } = useViewport();
@@ -25,6 +26,9 @@ function App() {
         </Route>
         <Route path='/sign-up'>
           <SignUp />
+        </Route>
+        <Route path='/home'>
+          <AllPosts />
         </Route>
         <ProtectedRoute path='/publish'>
           <PublishRouter />

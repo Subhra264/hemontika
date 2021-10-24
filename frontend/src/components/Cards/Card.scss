@@ -1,9 +1,14 @@
 @import 'src/utils/styles.scss';
 
 .card {
-    width: 7rem;
+    width: 10rem;
     display: inline-block;
     padding: 0.4rem;
+    margin: 0.2rem;
+
+    .mobile & {
+        width: 8rem;
+    }
 
     .card-img {
         border-radius: 1rem;
@@ -13,7 +18,7 @@
     }
 
     .card-details {
-        padding: 0.7rem 0.3rem;
+        padding: 0.7em 0.3em;
 
         .card-title {
             font-weight: bold;
@@ -27,11 +32,11 @@
         .card-impression {
             display: flex;
             justify-content: space-between;
-            font-size: 0.7rem;
+            font-size: 0.7em;
         }
 
         .card-read-time {
-            font-size: 0.8rem;
+            font-size: 0.8em;
         }
     }
 
