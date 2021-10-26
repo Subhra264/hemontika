@@ -3,13 +3,12 @@ import './utils/font-awesome';
 import { Switch, Route } from 'react-router-dom';
 import LogIn from './components/LogIn/LogIn';
 import SignUp from './components/SignUp/SignUp';
-import Card from './components/Cards/Card';
 import useViewport from './hooks/useViewport';
 import SubMenuBar from './components/SubMenuBar/SubMenuBar';
 import MenuBar from './components/MenuBar/MenuBar';
 import ProtectedRoute from './components/ProtectedRoute';
 import PublishRouter from './components/Publish/PublishRouter';
-import AllPosts from './components/AllPosts/AllPosts';
+import SearchPage from './components/SearchPage/SearchPage';
 
 function App() {
   const { isMobile, width } = useViewport();
@@ -28,7 +27,7 @@ function App() {
           <SignUp />
         </Route>
         <Route path='/home'>
-          <AllPosts />
+          <SearchPage />
         </Route>
         <ProtectedRoute path='/publish'>
           <PublishRouter />

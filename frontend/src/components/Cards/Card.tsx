@@ -1,6 +1,10 @@
 import './Card.scss';
 
-const Card: React.FC = (props) => {
+interface CardProps {
+    horizontal?: boolean;
+}
+
+const Card: React.FC<CardProps> = (props) => {
     return (
         <div className="card">
             <div className="card-img">
