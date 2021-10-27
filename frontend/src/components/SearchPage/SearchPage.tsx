@@ -2,22 +2,22 @@ import { useState } from 'react';
 import { CardListStyleContext } from '../../utils/contexts';
 import ResponsiveWrapper from '../ResponsiveWrapper/ResponsiveWrapper';
 import SearchHeader from './SearchHeader/SearchHeader';
-import SearchResultList from './SearchResultList/SearchResultList';
+import SearchResult from './SearchResult/SearchResult';
 
 const SearchPage: React.FC = (props) => {
-    const [resultListHorStyle, setResultListHorStyle] = useState(false);
+    const [resultStyleList, setResultStyleList] = useState(false);
 
     return (
         <ResponsiveWrapper>
             <CardListStyleContext.Provider
                 value={{
-                    resultListHorStyle,
-                    setResultListHorStyle
+                    resultStyleList,
+                    setResultStyleList
                 }}
             >
                 <h2>All Posts</h2>
-                <SearchHeader resultListHorStyle={resultListHorStyle} />
-                <SearchResultList resultListHorStyle={resultListHorStyle} />
+                <SearchHeader />
+                <SearchResult  />
             </CardListStyleContext.Provider>
         </ResponsiveWrapper>
     );

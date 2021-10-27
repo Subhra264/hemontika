@@ -1,0 +1,36 @@
+@import 'src/utils/styles.scss';
+
+.search {
+    width: 60%;
+    max-width: 25em;
+    min-width: 7em;
+
+    form {
+        display: grid;
+        grid-template-columns: 9fr 1fr;
+        width: 100%;
+        padding: 0.1em 0.8em;
+        border-radius: 1.8em;
+        background-color: $primary_light;
+
+        .search-input {
+            border: none;
+            padding: 0.2em 0.8em;
+            background: none;
+            outline: none;
+            display: inline-block;
+            width: inherit;
+        }
+
+        button {
+            display: inline-block;
+            border: none;
+            outline: none;
+            background: none;
+            padding: 0.5em;
+            color: $primary_dark;
+            cursor: pointer;
+            margin: auto;
+        }
+    }
+}

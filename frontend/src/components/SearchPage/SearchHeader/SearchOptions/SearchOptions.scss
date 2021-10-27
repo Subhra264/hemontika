@@ -1,0 +1,10 @@
+.search-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    .search-options-icon {
+        margin: 0 0.6em;
+        cursor: pointer;
+    }
+}

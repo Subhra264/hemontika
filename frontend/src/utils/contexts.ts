@@ -6,8 +6,8 @@ interface ViewportDefault {
 }
 
 interface CardListStyleDefault {
-    resultListHorStyle: null | boolean;
-    setResultListHorStyle: null | React.Dispatch<React.SetStateAction<boolean>>;
+    resultStyleList: null | boolean;
+    setResultStyleList: null | React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const viewportDefault: ViewportDefault = {
@@ -16,8 +16,8 @@ const viewportDefault: ViewportDefault = {
 };
 
 const cardListStyleDefault: CardListStyleDefault = {
-    resultListHorStyle: null,
-    setResultListHorStyle: null
+    resultStyleList: false,
+    setResultStyleList: null
 };
 
 export const ViewportContext = React.createContext(viewportDefault);

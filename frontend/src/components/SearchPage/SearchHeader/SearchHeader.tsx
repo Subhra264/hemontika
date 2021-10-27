@@ -1,15 +1,12 @@
 import Search from './Search/Search';
 import SearchOptions from './SearchOptions/SearchOptions';
+import './SearchHeader.scss';
 
-interface SearchHeaderProps {
-    resultListHorStyle: boolean;
-}
-
-const SearchHeader: React.FC<SearchHeaderProps> = (props) => {
+const SearchHeader: React.FC = (props) => {
     return (
         <div className="search-container">
             <Search />
-            <SearchOptions resultListHorStyle={props.resultListHorStyle} />
+            <SearchOptions />
         </div>
     );
 };
