@@ -1,8 +1,12 @@
-.search-result-list {
+.search-result {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
 
     .card {
         width: auto !important;
+    }
+
+    &.list-view {
+        grid-template-columns: auto;
     }
 }

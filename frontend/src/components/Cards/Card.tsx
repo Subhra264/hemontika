@@ -1,7 +1,7 @@
 import './Card.scss';
 
 interface CardProps {
-    horizontal?: boolean;
+    // horizontal?: boolean;
 }
 
 const Card: React.FC<CardProps> = (props) => {

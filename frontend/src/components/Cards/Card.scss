@@ -40,4 +40,17 @@
         }
     }
 
+    .list-view & {
+        max-width: 40em;
+        display: inline-grid;
+        grid-template-columns: 1fr 2fr;
+
+        .card-img {
+            max-width: 12em;
+        }
+
+        .card-details {
+            padding: 0.7em;
+        }
+    }
 }

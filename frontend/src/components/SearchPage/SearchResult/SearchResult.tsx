@@ -9,16 +9,16 @@ interface SearchResultProps {
 
 const SearchResultList: React.FC<SearchResultProps> = (props) => {
     const [resultCards, setResultCards] = useState<Array<React.ReactElement>>([
-        <Card horizontal={true} />,
-        <Card horizontal={true} />,
-        <Card horizontal={true} />,
-        <Card horizontal={true} />,
-        <Card horizontal={true} />,
-        <Card horizontal={true} />,
-        <Card horizontal={true} />,
-        <Card horizontal={true} />,
-        <Card horizontal={true} />,
-        <Card horizontal={true} />
+        <Card />,
+        <Card />,
+        <Card />,
+        <Card />,
+        <Card />,
+        <Card />,
+        <Card />,
+        <Card />,
+        <Card />,
+        <Card />
     ]);
     const { resultStyleList } = useContext(CardListStyleContext);
 
@@ -27,7 +27,7 @@ const SearchResultList: React.FC<SearchResultProps> = (props) => {
     }, [resultStyleList]);
 
     return (
-        <div className="search-result-list">
+        <div className={'search-result' + (resultStyleList? ' list-view' : '')}>
             { resultCards }
         </div>
     );
