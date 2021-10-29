@@ -18,9 +18,9 @@ const SearchOptions: React.FC = (props) => {
             <div className="search-options-icon toggle-result-list-style" onClick={toggleListStyle}>
                 {
                     resultStyleList? 
-                        <ListIcon />
-                    : 
                         <GalleryIcon />
+                    : 
+                        <ListIcon />
                 }
             </div>
         </div>

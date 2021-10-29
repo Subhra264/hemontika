@@ -9,6 +9,8 @@ import MenuBar from './components/MenuBar/MenuBar';
 import ProtectedRoute from './components/ProtectedRoute';
 import PublishRouter from './components/Publish/PublishRouter';
 import SearchPage from './components/SearchPage/SearchPage';
+import SlidingCardList from './components/SlidingCardList/SlidingCardList';
+import ResponsiveWrapper from './components/ResponsiveWrapper/ResponsiveWrapper';
 
 function App() {
   const { isMobile, width } = useViewport();
@@ -28,6 +30,16 @@ function App() {
         </Route>
         <Route path='/home'>
           <SearchPage />
+        </Route>
+        <Route path='/popular'>
+          <ResponsiveWrapper>
+            <SlidingCardList title='Stories'/>
+            <SlidingCardList title='Poems' />
+            <SlidingCardList title='Novels' />
+            <SlidingCardList title='Books' />
+            <SlidingCardList title='Arts' />
+            <SlidingCardList title='Musics' />
+          </ResponsiveWrapper>
         </Route>
         <ProtectedRoute path='/publish'>
           <PublishRouter />

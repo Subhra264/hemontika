@@ -1,0 +1,39 @@
+@import 'src/utils/styles.scss';
+
+.sliding-card-list {
+    .list-title-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0.6em 0;
+
+        .list-more {
+            a {
+                display: inline-block;
+
+                .link-more-title, .link-more-icon {
+                    display: inline-block;
+                    margin: 0 0.3em;
+                }
+
+                .link-more-icon {
+                    padding: 0 0.5em;
+                    background-color: $primary_dark;
+                    border-radius: 50%;
+                    color: white;
+                }
+            }
+        }
+    }
+
+    .card-list {
+        display: grid;
+        overflow: auto;
+        grid-auto-flow: column;
+        scrollbar-width: 0px;
+
+        &::-webkit-scrollbar {
+            height: 0px;
+        }
+    }
+}
