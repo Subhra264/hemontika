@@ -1,0 +1,116 @@
+@import 'src/utils/styles.scss';
+$base: 'details';
+
+.literature-details {    
+    .#{$base}-img {
+        height: 75vmin;
+        border-radius: 0.8em;
+        background-color: $primary_light;
+    }
+
+    .#{$base}-content {
+        >div {
+            margin: 0.5em 0;
+        }
+
+        .#{$base}-title {
+            font-size: 1.5em;
+            margin: 0.7em 0;
+        }
+
+        .#{$base}-author {
+            display: flex;
+            align-items: center;
+
+            .author-pic {
+                width: 2em;
+                height: 2em;
+                border-radius: 50%;
+                background-color: $secondary_light;
+            }
+
+            .author-name {
+                margin: 0 0.5em;
+                color: $grey_1;
+            }
+        }
+
+        .#{$base}-impressions, .#{$base}-published-on {
+            color: $grey_1;
+        }
+
+        .#{$base}-impressions {
+            display: flex;
+            align-items: center;
+
+            .impression {
+                margin-right: 1.4em;
+            }
+
+            .#{$base}-rating {
+                display: flex;
+                align-items: center;
+
+                .rating-star-icon {
+                    padding: 0 0.5em;
+                }
+            }
+        }
+
+        .#{$base}-tags {
+            .#{$base}-tag {
+                display: inline-block;
+                padding: 0.2em 1em;
+                border-radius: 1em;
+                background-color: $primary_light;
+                color: $grey_1;
+                margin: 0 0.4em;
+            }
+        }
+
+        .#{$base}-summary {
+            margin: 1em 0;
+
+            .#{$base}-summary-heading {
+                font-size: 1.1em;
+                color: $primary_dark;
+
+                .heading-underline {
+                    margin: 0.3em 0;
+                    width: 6em;
+                    height: 1px;
+                    background-color: $primary_dark;
+                }
+            }
+
+            .#{$base}-summary-content {
+                padding: 0.4em 0;
+            }
+        }
+
+        .#{$base}-buttons {
+            display: grid;
+            align-items: center;
+            grid-auto-flow: column;
+            column-gap: 2em;
+            grid-template-columns: repeat(3, max-content);
+
+            button {
+                border-radius: 1.4em;
+                margin: 0;
+                padding: 0.8em 2.7em ;
+            }
+
+            svg {
+                margin: 0 0.5em;
+            }
+
+            .mobile & {
+                display: flex;
+                justify-content: space-between;
+                column-gap: normal;
+                grid-template-columns: none;
+            }
+        }
+    }
+}

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './Card.scss';
 
 interface CardProps {
@@ -6,7 +7,7 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = (props) => {
     return (
-        <div className="card">
+        <Link to='/stories/story-id' className="card">
             <div className="card-img">
 
             </div>
@@ -18,7 +19,7 @@ const Card: React.FC<CardProps> = (props) => {
                 </div>
                 <div className="card-read-time">6 min read</div>
             </div>
-        </div>
+        </Link>
     );
 };
 

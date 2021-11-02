@@ -8,9 +8,9 @@ import SubMenuBar from './components/SubMenuBar/SubMenuBar';
 import MenuBar from './components/MenuBar/MenuBar';
 import ProtectedRoute from './components/ProtectedRoute';
 import PublishRouter from './components/Publish/PublishRouter';
-import SearchPage from './components/SearchPage/SearchPage';
 import SlidingCardList from './components/SlidingCardList/SlidingCardList';
 import ResponsiveWrapper from './components/ResponsiveWrapper/ResponsiveWrapper';
+import HomeRouter from './components/Home/HomeRouter';
 
 function App() {
   const { isMobile, width } = useViewport();
@@ -28,9 +28,6 @@ function App() {
         <Route path='/sign-up'>
           <SignUp />
         </Route>
-        <Route path='/home'>
-          <SearchPage />
-        </Route>
         <Route path='/popular'>
           <ResponsiveWrapper>
             <SlidingCardList title='Stories'/>
@@ -44,6 +41,9 @@ function App() {
         <ProtectedRoute path='/publish'>
           <PublishRouter />
         </ProtectedRoute>
+        <Route path='/'>
+          <HomeRouter />
+        </Route>
       </Switch>
     </div>
   );
